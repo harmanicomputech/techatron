@@ -158,12 +158,17 @@
         scroll-behavior: auto !important;
     }
 
-    .marquee__row {
+    .clients__track {
         animation: none;
     }
 
-    .marquee {
+    .clients__marquee {
         overflow-x: auto;
+        mask-image: none;
+    }
+
+    .clients__group[aria-hidden='true'] {
+        display: none;
     }
 
     .cursor {

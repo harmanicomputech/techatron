@@ -57,30 +57,13 @@
             @include('partials.hero-scene')
         </div>
 
-        <a class="scroll-cue" href="#marquee" aria-label="Scroll to content"><span></span>Scroll</a>
+        <a class="scroll-cue" href="#specialties" aria-label="Scroll to content"><span></span>Scroll</a>
     </section>
 
-    {{-- Marquee --}}
-    <section class="section--brand marquee" id="marquee" aria-label="What we do" data-marquee>
-        <div class="marquee__row" aria-hidden="true">
-            @for ($copy = 0; $copy < 2; $copy++)
-                <div class="marquee__group">
-                    @foreach ($services->take(5) as $item)<span>{{ $item['name'] }}</span>@endforeach
-                </div>
-            @endfor
-        </div>
-        <div class="marquee__row marquee__row--reverse marquee__row--outline" aria-hidden="true">
-            @for ($copy = 0; $copy < 2; $copy++)
-                <div class="marquee__group">
-                    @foreach ($services->skip(5) as $item)<span>{{ $item['name'] }}</span>@endforeach
-                </div>
-            @endfor
-        </div>
-        <p class="sr-only">{{ $services->pluck('name')->implode(', ') }}</p>
-    </section>
+    @include('partials.clients')
 
     {{-- Specialties --}}
-    <section class="section" aria-labelledby="specialty-title">
+    <section class="section" id="specialties" aria-labelledby="specialty-title">
         <div class="container">
             <div class="section-head">
                 <div>

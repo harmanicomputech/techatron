@@ -15,7 +15,6 @@ import { nav } from './navigation.js';
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
 const $$ = (selector, scope = document) => [...scope.querySelectorAll(selector)];
-const clamp = (v, min, max) => Math.min(max, Math.max(min, v));
 
 /* Smooth scrolling, driven by GSAP's ticker so ScrollTrigger stays in sync */
 function initSmoothScroll() {
@@ -150,25 +149,6 @@ function initScrubText() {
             ease: 'none',
             scrollTrigger: { trigger: el, start: 'top 80%', end: 'bottom 45%', scrub: true },
         });
-    });
-}
-
-/* Marquee leans into fast scrolling */
-function initMarquee() {
-    const marquee = document.querySelector('[data-marquee]');
-    if (!marquee) return;
-
-    const proxy = { skew: 0 };
-    const set = () => marquee.style.setProperty('--skew', `${proxy.skew}deg`);
-
-    ScrollTrigger.create({
-        onUpdate(self) {
-            const skew = clamp(self.getVelocity() / -350, -12, 12);
-            if (Math.abs(skew) > Math.abs(proxy.skew)) {
-                proxy.skew = skew;
-                gsap.to(proxy, { skew: 0, duration: 0.9, ease: 'power3', overwrite: true, onUpdate: set });
-            }
-        },
     });
 }
 
@@ -364,7 +344,6 @@ export function initMotion() {
     initSplitHeadings();
     initReveals();
     initScrubText();
-    initMarquee();
     initHorizontal();
     initStack();
     initDraw();

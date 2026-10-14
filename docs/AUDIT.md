@@ -180,3 +180,16 @@ These are defaults in `config/site.php`, so they work without any `.env` setup; 
 - the delivery technology stack
 - an SVG or larger version of the logo
 - legal review of the privacy notice
+
+---
+
+## Revision 4 — client logos replace the services marquee
+
+The scrolling band of service names below the hero has been replaced with a client logo section:
+
+- logos sit in tiles, shown in greyscale until hovered
+- six or more logos scroll continuously, pausing on hover or keyboard focus, with faded edges
+- fewer than six sit in a static centred row
+- in dark mode, logos become white silhouettes unless a dark version is supplied
+
+Logos are listed in `resources/content/clients.php`, with the files in `public/images/clients/`. The section stays hidden until real clients are added. **Needed:** client logos (SVG or transparent PNG) and confirmation that each client may be named.

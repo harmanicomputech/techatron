@@ -19,6 +19,7 @@ class PageController extends Controller
             'platforms' => $this->content->platforms(),
             'work' => $this->content->work()->take(3),
             'testimonials' => $this->content->testimonials(),
+            'clients' => $this->content->clients(),
             'insights' => $this->content->insights()->take(3),
         ]);
     }

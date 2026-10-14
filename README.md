@@ -41,6 +41,7 @@ All copy lives in `resources/content/`:
 | `engagements.php` | Ways to engage |
 | `platforms.php` | Platforms shown on the homepage. Only list what the team genuinely uses. |
 | `work.php` | Case studies. The homepage section and the nav link appear once this file has entries. |
+| `clients.php` | Client logos below the homepage hero (files in `public/images/clients/`). Hidden while empty; six or more logos scroll continuously. |
 | `testimonials.php` | Verified client quotes. Hidden while empty. |
 | `insights.php` + `insights/{slug}.md` | Articles. The page and nav link appear once this file has entries. |
 

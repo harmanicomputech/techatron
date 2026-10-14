@@ -2,70 +2,152 @@
    Homepage sections
    ========================================================================== */
 
-/* Marquee band */
+/* Client logos */
 
-.marquee {
+.clients {
     position: relative;
-    padding-block: clamp(1.5rem, 3vw, 2.5rem);
+    padding-block: clamp(2.5rem, 5vw, 4rem);
+    border-block: 1px solid var(--line);
+    background:
+        radial-gradient(60% 120% at 50% 0%, var(--accent-soft), transparent 70%),
+        var(--bg);
     overflow: hidden;
-    display: grid;
-    gap: 0.5rem;
 }
 
-.marquee__row {
+.clients__head {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: clamp(1.75rem, 3vw, 2.5rem);
+    text-align: center;
+}
+
+.clients__head .label {
+    flex: none;
+    max-width: 100%;
+    white-space: normal;
+}
+
+.clients__rule {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--line-strong));
+}
+
+.clients__rule:last-child {
+    background: linear-gradient(90deg, var(--line-strong), transparent);
+}
+
+.clients__marquee {
+    padding-block: 0.75rem;
+    margin-block: -0.75rem;
+    mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+
+.clients__marquee .clients__track {
     display: flex;
     width: max-content;
-    animation: marquee 38s linear infinite;
-    transform: skewX(var(--skew, 0deg));
+    animation: clients-scroll var(--duration, 40s) linear infinite;
 }
 
-.marquee__row--reverse {
-    animation-direction: reverse;
-    animation-duration: 46s;
+.clients__marquee:hover .clients__track,
+.clients__marquee:focus-within .clients__track {
+    animation-play-state: paused;
 }
 
-.marquee__row--outline span {
-    color: transparent;
-    -webkit-text-stroke: 1px rgb(255 255 255 / 0.55);
-}
-
-.marquee__group {
-    display: flex;
-    flex: none;
-    align-items: center;
-}
-
-.marquee span {
-    display: inline-flex;
-    align-items: center;
-    gap: clamp(1.25rem, 3vw, 2.5rem);
-    padding-right: clamp(1.25rem, 3vw, 2.5rem);
-    font-family: var(--font-display);
-    font-size: clamp(1.75rem, 1rem + 3vw, 3.75rem);
-    font-weight: 600;
-    letter-spacing: -0.03em;
-    line-height: 1.15;
-    white-space: nowrap;
-    color: #fff;
-}
-
-.marquee span::after {
-    content: '';
-    width: 0.45em;
-    height: 0.45em;
-    border-radius: 50%;
-    background: radial-gradient(circle at 35% 35%, #fff, var(--cyan-400));
-    box-shadow: -0.15em 0 0 rgb(40 40 40 / 0.55);
-}
-
-@keyframes marquee {
+@keyframes clients-scroll {
     to {
-        transform: translateX(-50%) skewX(var(--skew, 0deg));
+        transform: translateX(-50%);
     }
 }
 
-.marquee:hover .marquee__row {
-    animation-play-state: paused;
+.clients__group {
+    display: flex;
+    flex: none;
+    align-items: center;
+    gap: 1rem;
+    padding-right: 1rem;
+}
+
+.clients__group--static {
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0;
+}
+
+.client__tile {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: clamp(9.5rem, 16vw, 12.5rem);
+    height: clamp(5rem, 8vw, 6.25rem);
+    padding: 1.1rem 1.6rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+    box-shadow: var(--shadow-sm);
+    transition:
+        border-color 0.35s,
+        box-shadow 0.4s,
+        transform 0.5s var(--ease-out);
+}
+
+.client__tile:hover,
+.client__tile:focus-visible {
+    border-color: color-mix(in srgb, var(--accent) 40%, transparent);
+    box-shadow: var(--shadow);
+    transform: translateY(-4px);
+}
+
+.client__logo {
+    grid-area: 1 / 1;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    filter: grayscale(1);
+    opacity: 0.6;
+    transition:
+        filter 0.4s,
+        opacity 0.4s;
+}
+
+.client__tile:hover .client__logo,
+.client__tile:focus-visible .client__logo {
+    filter: none;
+    opacity: 1;
+}
+
+.client__logo--dark {
+    display: none;
+}
+
+:root[data-theme='dark'] .client__logo:not(.has-dark):not(.client__logo--dark) {
+    filter: grayscale(1) brightness(0) invert(1);
+    opacity: 0.7;
+}
+
+:root[data-theme='dark'] .client__tile:hover .client__logo:not(.has-dark) {
+    opacity: 1;
+}
+
+:root[data-theme='dark'] .client__logo.has-dark {
+    display: none;
+}
+
+:root[data-theme='dark'] .client__logo--dark {
+    display: block;
+}
+
+@media (max-width: 560px) {
+    .clients__rule {
+        display: none;
+    }
+
+    .clients__head {
+        justify-content: center;
+    }
 }
 
 /* Specialty cards */

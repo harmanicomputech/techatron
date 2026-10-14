@@ -70,6 +70,12 @@ class Content
         return $this->work()->get($slug);
     }
 
+    public function clients(): Collection
+    {
+        return collect($this->load('clients'))
+            ->map(fn (array $client, string $slug) => ['slug' => $slug] + $client);
+    }
+
     public function testimonials(): Collection
     {
         return collect($this->load('testimonials'));
@@ -100,6 +106,12 @@ class Content
         ]) : '';
 
         return $article;
+    }
+
+    /** Replace a content file's data for the rest of the request (used by tests). */
+    public function override(string $name, array $data): void
+    {
+        $this->loaded[$name] = $data;
     }
 
     private function load(string $name): array

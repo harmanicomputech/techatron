@@ -151,6 +151,45 @@ class PagesTest extends TestCase
             ->assertSee('"sameAs":["https://www.linkedin.com/company/techatron-consulting-limited/"', false);
     }
 
+    public function test_client_logos_are_hidden_until_real_clients_are_listed(): void
+    {
+        $this->get('/')->assertOk()->assertDontSee('id="clients"', false)->assertDontSee('marquee');
+    }
+
+    public function test_client_logos_render_with_names_as_alt_text(): void
+    {
+        $clients = [];
+        foreach (range(1, 6) as $i) {
+            $clients["client-{$i}"] = ['name' => "Client {$i}", 'logo' => "images/clients/client-{$i}.svg"];
+        }
+        $clients['client-1']['url'] = 'https://client-one.example';
+        app(Content::class)->override('clients', $clients);
+
+        $html = $this->get('/')->assertOk()
+            ->assertSee('id="clients"', false)
+            ->assertSee('alt="Client 6"', false)
+            ->assertSee('href="https://client-one.example"', false)
+            ->getContent();
+
+        // Six or more logos scroll: the list is duplicated for a seamless loop,
+        // and the copy is hidden from assistive technology.
+        $this->assertSame(2, substr_count($html, 'class="clients__group '));
+        $this->assertSame(1, substr_count($html, 'alt="Client 1"'));
+        $this->assertStringContainsString('aria-hidden="true"', $html);
+    }
+
+    public function test_a_few_client_logos_sit_in_a_static_row(): void
+    {
+        app(Content::class)->override('clients', [
+            'one' => ['name' => 'One', 'logo' => 'images/clients/one.svg'],
+            'two' => ['name' => 'Two', 'logo' => 'images/clients/two.svg'],
+        ]);
+
+        $html = $this->get('/')->assertOk()->getContent();
+        $this->assertStringContainsString('clients__group--static', $html);
+        $this->assertStringNotContainsString('clients__marquee', $html);
+    }
+
     public function test_contact_page_preselects_a_valid_service_from_the_query(): void
     {
         $html = $this->get('/contact?service=cybersecurity')->assertOk()->getContent();

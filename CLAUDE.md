@@ -11,7 +11,7 @@ Website for Techatron Consulting Limited, a full-service digital agency in Lagos
 
 ## Layout
 
-- `resources/content/*.php` — all site copy (services, approach, challenges, principles, engagements, platforms, work, testimonials, insights). Edit copy here, not in templates. Read through `App\Support\Content`. Each service has a `group`: `specialty` (websites, software, mobile — always first), `digital` (campaigns, brand/UI-UX) or `technology`.
+- `resources/content/*.php` — all site copy (services, approach, challenges, principles, engagements, platforms, clients, work, testimonials, insights). Edit copy here, not in templates. Read through `App\Support\Content`. Each service has a `group`: `specialty` (websites, software, mobile — always first), `digital` (campaigns, brand/UI-UX) or `technology`.
 - `config/site.php` — company details; contact details come from `.env` and are hidden when blank
 - `routes/web.php` — pages, contact form, sitemap/robots, legacy redirects (redirects must stay above `/services/{slug}`)
 - `app/Http/Controllers/` — thin controllers; `EnquiryController` + `StoreEnquiryRequest` handle the project brief form
@@ -33,7 +33,7 @@ Website for Techatron Consulting Limited, a full-service digital agency in Lagos
 
 ## Content rules
 
-Never invent clients, testimonials, statistics, certifications, partnerships, awards or outcomes. Sections for work, testimonials and insights hide themselves while their content files are empty — leave them empty rather than adding placeholders. Concept work must be marked `'type' => 'concept'`. Copy is British English.
+Never invent clients, testimonials, statistics, certifications, partnerships, awards or outcomes. Sections for client logos, work, testimonials and insights hide themselves while their content files are empty — leave them empty rather than adding placeholders. Concept work must be marked `'type' => 'concept'`. Copy is British English.
 
 ## Enquiry form
 
