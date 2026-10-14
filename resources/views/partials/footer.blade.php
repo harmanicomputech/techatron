@@ -1,22 +1,36 @@
 @php($contact = config('site.contact'))
-<footer class="site-footer">
+<footer class="site-footer section--alt">
     <div class="container">
         <div class="footer__top">
             <div class="footer__intro">
                 <a class="brand" href="{{ route('home') }}" aria-label="{{ config('site.name') }} home">
-                    <x-logo-mark /><span>Techatron</span><small>Consulting</small>
+                    <img class="logo-light" src="{{ asset('images/logo.png') }}" alt="" width="332" height="52" loading="lazy">
+                    <img class="logo-dark" src="{{ asset('images/logo-dark.png') }}" alt="" width="332" height="52" loading="lazy">
                 </a>
                 <p>{{ config('site.description') }}</p>
+                <a class="btn btn--primary" href="{{ route('contact') }}" data-magnetic>Start a project <x-icon name="arrow" class="arrow" /></a>
             </div>
 
-            <div class="footer__col">
-                <h2 class="label">Services</h2>
-                <ul>
-                    @foreach ($navServices as $item)
-                        <li><a href="{{ route('services.show', $item['slug']) }}">{{ $item['short'] }}</a></li>
-                    @endforeach
-                </ul>
-            </div>
+            @foreach ($navGroups as $group => $items)
+                @if ($loop->index < 2)
+                    <div class="footer__col">
+                        <h2 class="label">{{ $group }}</h2>
+                        <ul>
+                            @foreach ($items as $item)
+                                <li><a href="{{ route('services.show', $item['slug']) }}">{{ $item['name'] }}</a></li>
+                            @endforeach
+                        </ul>
+                        @if ($loop->index === 1)
+                            <h2 class="label" style="margin-top: 2rem">Technology</h2>
+                            <ul>
+                                @foreach ($navGroups['Technology'] as $item)
+                                    <li><a href="{{ route('services.show', $item['slug']) }}">{{ $item['short'] }}</a></li>
+                                @endforeach
+                            </ul>
+                        @endif
+                    </div>
+                @endif
+            @endforeach
 
             <div class="footer__col">
                 <h2 class="label">Company</h2>
@@ -27,10 +41,7 @@
                     @if ($hasInsights)<li><a href="{{ route('insights.index') }}">Insights</a></li>@endif
                     <li><a href="{{ route('contact') }}">Contact</a></li>
                 </ul>
-            </div>
-
-            <div class="footer__col">
-                <h2 class="label">Contact</h2>
+                <h2 class="label" style="margin-top: 2rem">Get in touch</h2>
                 <ul>
                     @if ($contact['email'])<li><a href="mailto:{{ $contact['email'] }}">{{ $contact['email'] }}</a></li>@endif
                     @if ($contact['phone'])<li><a href="tel:{{ preg_replace('/[^0-9+]/', '', $contact['phone']) }}">{{ $contact['phone'] }}</a></li>@endif
@@ -44,7 +55,9 @@
             </div>
         </div>
 
-        <div class="footer__wordmark" aria-hidden="true">Techatron</div>
+        <div class="footer__wordmark" aria-hidden="true" data-footer-word>
+            @foreach (str_split('TECHATRON') as $letter)<span>{{ $letter }}</span>@endforeach
+        </div>
 
         <div class="footer__bottom">
             <p>&copy; {{ now()->year }} {{ config('site.legal_name') }}. All rights reserved.</p>

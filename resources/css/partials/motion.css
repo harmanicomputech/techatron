@@ -1,0 +1,187 @@
+/* ==========================================================================
+   Motion: cursor, reveals, split text, page and theme transitions
+   ========================================================================== */
+
+/* Custom cursor (fine pointers only, added by JS) */
+
+.cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    pointer-events: none;
+    display: none;
+}
+
+.has-cursor .cursor {
+    display: block;
+}
+
+.cursor__dot,
+.cursor__ring {
+    position: absolute;
+    border-radius: 50%;
+    translate: -50% -50%;
+}
+
+.cursor__dot {
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+}
+
+.cursor__ring {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid color-mix(in srgb, var(--accent) 55%, transparent);
+    transition:
+        width 0.4s var(--ease-out),
+        height 0.4s var(--ease-out),
+        background-color 0.3s,
+        border-color 0.3s;
+}
+
+.cursor__label {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #fff;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.cursor.is-hover .cursor__ring {
+    width: 56px;
+    height: 56px;
+    background: color-mix(in srgb, var(--accent) 12%, transparent);
+}
+
+.cursor.is-label .cursor__ring {
+    width: 84px;
+    height: 84px;
+    background: var(--accent);
+    border-color: var(--accent);
+}
+
+.cursor.is-label .cursor__label {
+    opacity: 1;
+}
+
+.cursor.is-label .cursor__dot,
+.cursor.is-hidden {
+    opacity: 0;
+}
+
+/* Scroll reveals (JS sets the initial state, so no-JS shows everything) */
+
+.split-line {
+    display: block;
+    overflow: hidden;
+    padding-bottom: 0.08em;
+    margin-bottom: -0.08em;
+}
+
+.split-word {
+    display: inline-block;
+}
+
+/* Cross-document page transitions */
+
+@view-transition {
+    navigation: auto;
+}
+
+::view-transition-old(root) {
+    animation: page-out 0.35s var(--ease-in-out) both;
+}
+
+::view-transition-new(root) {
+    animation: page-in 0.6s var(--ease-out) both;
+}
+
+::view-transition-group(site-header) {
+    animation-duration: 0s;
+}
+
+.site-header {
+    view-transition-name: site-header;
+}
+
+@keyframes page-out {
+    to {
+        opacity: 0;
+        transform: translateY(-12px);
+    }
+}
+
+@keyframes page-in {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+}
+
+/* Theme switch: circular reveal from the toggle */
+
+:root.theme-switching::view-transition-old(root),
+:root.theme-switching::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+}
+
+:root.theme-switching .site-header {
+    view-transition-name: none;
+}
+
+:root.theme-switching::view-transition-old(root) {
+    z-index: 1;
+}
+
+:root.theme-switching::view-transition-new(root) {
+    z-index: 2;
+}
+
+/* Reduced motion: no smooth scroll, no loops, no parallax */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        transition-delay: 0s !important;
+        scroll-behavior: auto !important;
+    }
+
+    .marquee__row {
+        animation: none;
+    }
+
+    .marquee {
+        overflow-x: auto;
+    }
+
+    .cursor {
+        display: none !important;
+    }
+
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+        animation: none;
+    }
+}
+
+@media print {
+    .site-header,
+    .site-footer,
+    .cursor,
+    .scroll-progress,
+    .skip-link {
+        display: none;
+    }
+}

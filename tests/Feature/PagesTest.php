@@ -11,11 +11,11 @@ class PagesTest extends TestCase
     public static function pages(): array
     {
         return [
-            'home' => ['/', 'We engineer the software your business'],
-            'services' => ['/services', 'Engineering and advice for every stage'],
+            'home' => ['/', 'We build websites, software, mobile apps and campaigns that grow your business.'],
+            'services' => ['/services', 'Everything your digital presence needs'],
             'approach' => ['/approach', 'A disciplined path from idea'],
-            'about' => ['/about', 'A technology partner'],
-            'contact' => ['/contact', 'Tell us what you are trying to achieve.'],
+            'about' => ['/about', 'A digital agency that thinks like an engineer'],
+            'contact' => ['/contact', 'Let’s build something remarkable together.'],
             'work' => ['/work', 'Projects told as stories'],
             'privacy' => ['/privacy', 'Privacy notice'],
         ];
@@ -75,13 +75,15 @@ class PagesTest extends TestCase
         $this->get('/about-us')->assertMovedPermanently()->assertRedirect('/about');
         $this->get('/contact-us')->assertMovedPermanently()->assertRedirect('/contact');
         $this->get('/services/managed-services')->assertRedirect('/services/managed-it');
+        $this->get('/services/mobile-apps')->assertRedirect('/services/mobile-app-development');
+        $this->get('/services/custom-software')->assertRedirect('/services/software-development');
     }
 
     public function test_sitemap_lists_public_pages_only(): void
     {
         $response = $this->get('/sitemap.xml')->assertOk()->assertHeader('Content-Type', 'application/xml; charset=UTF-8');
 
-        $response->assertSee('<loc>'.route('services.show', 'mobile-apps').'</loc>', false)
+        $response->assertSee('<loc>'.route('services.show', 'mobile-app-development').'</loc>', false)
             ->assertSee('<loc>'.route('contact').'</loc>', false)
             ->assertDontSee('<loc>'.route('work.index').'</loc>', false);
     }
@@ -103,12 +105,35 @@ class PagesTest extends TestCase
             ->assertHeader('Content-Security-Policy');
     }
 
+    public function test_the_agency_positioning_and_specialties_lead_the_homepage(): void
+    {
+        $home = $this->get('/')->assertOk();
+
+        $home->assertSee('Digital agency')
+            ->assertSeeInOrder(['Website Development', 'Software Development', 'Mobile App Development'])
+            ->assertSee(route('services.show', 'digital-marketing'), false)
+            ->assertSee('data-theme-toggle', false)
+            ->assertSee(asset('images/logo.png'), false)
+            ->assertSee(asset('images/logo-dark.png'), false);
+    }
+
+    public function test_services_are_grouped_into_specialty_digital_and_technology(): void
+    {
+        $content = app(Content::class);
+
+        $this->assertSame(
+            ['website-development', 'software-development', 'mobile-app-development'],
+            $content->servicesIn('specialty')->keys()->all(),
+        );
+        $this->assertSame(['digital-marketing', 'brand-and-design'], $content->servicesIn('digital')->keys()->all());
+        $this->assertSame($content->services()->count(), $content->services()->whereIn('group', ['specialty', 'digital', 'technology'])->count());
+    }
+
     public function test_contact_page_preselects_a_valid_service_from_the_query(): void
     {
-        $this->get('/contact?service=cybersecurity')
-            ->assertOk()
-            ->assertSee('value="cybersecurity"
-                                                checked', false);
+        $html = $this->get('/contact?service=cybersecurity')->assertOk()->getContent();
+        $this->assertMatchesRegularExpression('/value="cybersecurity"\s+checked/', $html);
+        $this->assertDoesNotMatchRegularExpression('/value="managed-it"\s+checked/', $html);
 
         $this->get('/contact?service=<script>')->assertOk()->assertDontSee('<script>', false);
     }

@@ -1,0 +1,169 @@
+/* ==========================================================================
+   Design tokens
+   Brand: Techatron blue #0B34B7 and charcoal #282828, taken from the logo.
+   Light is the default theme; [data-theme='dark'] switches to charcoal.
+   Components use the semantic tokens only.
+   ========================================================================== */
+
+:root {
+    /* Brand palette */
+    --blue-700: #082689;
+    --blue-600: #0a2ea3;
+    --blue-500: #0b34b7;
+    --blue-400: #2f5be8;
+    --blue-300: #7090ff;
+    --blue-200: #b4c4ff;
+    --blue-100: #e2e8ff;
+    --blue-50: #f2f5ff;
+    --cyan-400: #18b6ff;
+    --violet-400: #7c5cff;
+    --charcoal-950: #1c1c1c;
+    --charcoal-900: #222222;
+    --charcoal-800: #282828;
+    --charcoal-700: #303030;
+    --charcoal-600: #393939;
+    --charcoal-500: #474747;
+    --grey-400: #9a9a9a;
+    --white: #ffffff;
+
+    --gradient-brand: linear-gradient(120deg, var(--blue-500) 0%, var(--blue-400) 45%, var(--cyan-400) 100%);
+    --gradient-text: linear-gradient(100deg, var(--blue-500) 0%, var(--blue-400) 40%, var(--cyan-400) 100%);
+
+    /* Semantic: light theme */
+    --bg: #ffffff;
+    --bg-alt: #f4f6fb;
+    --surface: #ffffff;
+    --raised: #f2f4f9;
+    --fg: var(--charcoal-800);
+    --fg-muted: #565b67;
+    --fg-dim: #6c717d;
+    --line: rgb(40 40 40 / 0.09);
+    --line-strong: rgb(40 40 40 / 0.17);
+    --accent: var(--blue-500);
+    --accent-hover: var(--blue-600);
+    --accent-text: var(--blue-500);
+    --accent-soft: var(--blue-50);
+    --on-accent: var(--white);
+    --grid-line: rgb(11 52 183 / 0.06);
+    --glass: rgb(255 255 255 / 0.72);
+    --glass-line: rgb(255 255 255 / 0.9);
+    --shadow-sm: 0 2px 8px -2px rgb(16 28 70 / 0.08);
+    --shadow: 0 24px 60px -28px rgb(16 28 70 / 0.28);
+    --shadow-lg: 0 50px 100px -40px rgb(11 30 100 / 0.38);
+    --error: #c0262d;
+    --success: #0f8a55;
+    --focus: var(--blue-400);
+    --orb-glow: rgb(11 52 183 / 0.35);
+    --blob-1: rgb(11 52 183 / 0.22);
+    --blob-2: rgb(24 182 255 / 0.2);
+    --blob-3: rgb(124 92 255 / 0.16);
+
+    /* Type */
+    --font-display: 'Sora Variable', 'Geist Variable', ui-sans-serif, system-ui, sans-serif;
+    --font-sans: 'Geist Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --font-mono: 'Geist Mono Variable', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+
+    --text-xs: 0.75rem;
+    --text-sm: 0.875rem;
+    --text-base: 1rem;
+    --text-md: 1.125rem;
+    --text-lg: clamp(1.125rem, 1rem + 0.45vw, 1.375rem);
+    --text-xl: clamp(1.375rem, 1.15rem + 0.9vw, 1.875rem);
+    --text-2xl: clamp(1.75rem, 1.3rem + 1.7vw, 2.75rem);
+    --text-3xl: clamp(2.2rem, 1.5rem + 2.9vw, 4.25rem);
+    --text-4xl: clamp(2.6rem, 1.4rem + 5vw, 6.5rem);
+
+    /* Space & layout */
+    --gutter: clamp(1rem, 4vw, 3rem);
+    --container: 84rem;
+    --section: clamp(5rem, 10vw, 10rem);
+    --radius-sm: 8px;
+    --radius: 14px;
+    --radius-lg: 24px;
+    --radius-xl: 36px;
+    --header-h: 5rem;
+
+    /* Motion */
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+    --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+    --bg: var(--charcoal-800);
+    --bg-alt: #2d2d2d;
+    --surface: var(--charcoal-700);
+    --raised: var(--charcoal-600);
+    --fg: #f3f3f3;
+    --fg-muted: #bdbdbd;
+    --fg-dim: #9d9d9d;
+    --line: rgb(255 255 255 / 0.09);
+    --line-strong: rgb(255 255 255 / 0.17);
+    --accent: var(--blue-400);
+    --accent-hover: #4a70f0;
+    --accent-text: var(--blue-300);
+    --accent-soft: rgb(47 91 232 / 0.14);
+    --grid-line: rgb(255 255 255 / 0.045);
+    --glass: rgb(48 48 48 / 0.72);
+    --glass-line: rgb(255 255 255 / 0.1);
+    --shadow-sm: 0 2px 8px -2px rgb(0 0 0 / 0.3);
+    --shadow: 0 24px 60px -28px rgb(0 0 0 / 0.6);
+    --shadow-lg: 0 50px 100px -40px rgb(0 0 0 / 0.7);
+    --error: #ff7a7a;
+    --success: #4fd69c;
+    --focus: var(--blue-300);
+    --orb-glow: rgb(47 91 232 / 0.45);
+    --blob-1: rgb(47 91 232 / 0.28);
+    --blob-2: rgb(24 182 255 / 0.14);
+    --blob-3: rgb(124 92 255 / 0.16);
+
+    color-scheme: dark;
+}
+
+/* Inverse band: charcoal in light mode, a raised charcoal in dark mode */
+.section--ink {
+    --bg: var(--charcoal-800);
+    --bg-alt: var(--charcoal-700);
+    --surface: var(--charcoal-700);
+    --raised: var(--charcoal-600);
+    --fg: #f3f3f3;
+    --fg-muted: #bdbdbd;
+    --fg-dim: #a0a0a0;
+    --line: rgb(255 255 255 / 0.09);
+    --line-strong: rgb(255 255 255 / 0.17);
+    --accent: var(--blue-400);
+    --accent-hover: #4a70f0;
+    --accent-text: var(--blue-300);
+    --accent-soft: rgb(47 91 232 / 0.14);
+    --grid-line: rgb(255 255 255 / 0.045);
+    --focus: var(--blue-300);
+
+    color-scheme: dark;
+}
+
+:root[data-theme='dark'] .section--ink {
+    --bg: var(--charcoal-900);
+    --surface: var(--charcoal-800);
+    --raised: var(--charcoal-700);
+}
+
+/* Brand band: blue in both themes */
+.section--brand {
+    --bg: var(--blue-500);
+    --surface: rgb(255 255 255 / 0.08);
+    --raised: rgb(255 255 255 / 0.12);
+    --fg: #ffffff;
+    --fg-muted: rgb(255 255 255 / 0.78);
+    --fg-dim: rgb(255 255 255 / 0.62);
+    --line: rgb(255 255 255 / 0.16);
+    --line-strong: rgb(255 255 255 / 0.28);
+    --accent: #ffffff;
+    --accent-hover: var(--blue-50);
+    --accent-text: #ffffff;
+    --on-accent: var(--blue-500);
+    --focus: #ffffff;
+
+    color-scheme: dark;
+}

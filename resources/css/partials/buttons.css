@@ -1,0 +1,169 @@
+/* ==========================================================================
+   Buttons and links
+   ========================================================================== */
+
+.btn {
+    --btn-bg: transparent;
+    --btn-fg: var(--fg);
+    --btn-border: var(--line-strong);
+
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.65rem;
+    min-height: 3rem;
+    padding: 0 1.4rem;
+    border: 1px solid var(--btn-border);
+    border-radius: 999px;
+    background: var(--btn-bg);
+    color: var(--btn-fg);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    white-space: nowrap;
+    cursor: pointer;
+    isolation: isolate;
+    overflow: hidden;
+    transition:
+        border-color 0.3s,
+        color 0.3s,
+        box-shadow 0.3s,
+        transform 0.3s var(--ease-out);
+}
+
+/* Fill wipes up from the bottom on hover */
+.btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background: var(--btn-fill, var(--fg));
+    transform: translateY(101%);
+    transition: transform 0.45s var(--ease-out);
+}
+
+.btn:hover::before {
+    transform: none;
+}
+
+.btn:hover {
+    --btn-border: var(--fg);
+
+    color: var(--bg);
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+.btn--primary {
+    --btn-bg: var(--accent);
+    --btn-fg: var(--on-accent);
+    --btn-border: var(--accent);
+    --btn-fill: var(--charcoal-800);
+
+    box-shadow: 0 10px 30px -10px color-mix(in srgb, var(--accent) 70%, transparent);
+}
+
+.btn--primary:hover {
+    --btn-border: var(--charcoal-800);
+
+    color: #fff;
+    box-shadow: 0 16px 40px -14px color-mix(in srgb, var(--accent) 80%, transparent);
+}
+
+:root[data-theme='dark'] .btn--primary,
+.section--ink .btn--primary {
+    --btn-fill: #fff;
+}
+
+:root[data-theme='dark'] .btn--primary:hover,
+.section--ink .btn--primary:hover {
+    --btn-border: #fff;
+
+    color: var(--charcoal-800);
+}
+
+.section--brand .btn--primary {
+    --btn-fill: var(--charcoal-800);
+
+    box-shadow: 0 16px 40px -12px rgb(0 0 0 / 0.35);
+}
+
+.section--brand .btn--primary:hover {
+    --btn-border: var(--charcoal-800);
+
+    color: #fff;
+}
+
+.btn--lg {
+    min-height: 3.6rem;
+    padding: 0 1.9rem;
+    font-size: var(--text-base);
+}
+
+.btn--block {
+    width: 100%;
+}
+
+.btn__label {
+    position: relative;
+}
+
+.arrow {
+    flex: none;
+    width: 1rem;
+    height: 1rem;
+    transition: transform 0.35s var(--ease-out);
+}
+
+.btn:hover .arrow,
+.arrow-link:hover .arrow,
+.card:hover .card-link .arrow {
+    transform: translateX(4px);
+}
+
+.arrow-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    font-size: var(--text-sm);
+    color: var(--fg);
+    background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
+    transition: background-size 0.4s var(--ease-out), color 0.2s;
+}
+
+.arrow-link:hover {
+    background-size: 100% 1px;
+    color: var(--accent-text);
+}
+
+.arrow-link .arrow {
+    color: var(--accent-text);
+}
+
+/* Round icon button (theme toggle, menu) */
+.icon-btn {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border: 1px solid var(--line-strong);
+    border-radius: 50%;
+    background: var(--glass);
+    color: var(--fg);
+    cursor: pointer;
+    transition: border-color 0.2s, transform 0.3s var(--ease-out), background-color 0.3s;
+}
+
+.icon-btn:hover {
+    border-color: var(--fg);
+}
+
+.icon-btn svg {
+    width: 1.15rem;
+    height: 1.15rem;
+}

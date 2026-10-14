@@ -29,18 +29,18 @@
         </div>
     </section>
 
-    <section class="section theme-paper" aria-labelledby="principles-title">
+    <section class="section section--alt" aria-labelledby="principles-title">
         <div class="container">
             <div class="section-head">
                 <div>
                     <x-eyebrow>Built in from the start</x-eyebrow>
-                    <h2 class="h1" id="principles-title">Quality is designed, not inspected.</h2>
+                    <h2 class="h1" id="principles-title" data-split>Quality is designed, not inspected.</h2>
                 </div>
                 <p class="lead">These attributes shape decisions in every phase, so they never become an expensive retrofit.</p>
             </div>
             <div class="principles">
                 @foreach ($principles as $principle)
-                    <article class="principle" data-reveal style="--i: {{ $loop->index % 3 }}">
+                    <article class="principle spotlight" data-spotlight data-reveal style="--i: {{ $loop->index % 3 }}">
                         <x-glyph :name="$principle['name']" class="principle__glyph" />
                         <h3 class="h3">{{ $principle['name'] }}</h3>
                         <p>{{ $principle['body'] }}</p>
@@ -56,13 +56,13 @@
             <div class="section-head">
                 <div>
                     <x-eyebrow>Engagement models</x-eyebrow>
-                    <h2 class="h1" id="engage-title">Ways to work together.</h2>
+                    <h2 class="h1" id="engage-title" data-split>Ways to work together.</h2>
                 </div>
                 <p class="lead">Choose the shape that fits the work. Many clients start with advisory or a defined project and move to an ongoing arrangement.</p>
             </div>
             <div class="card-grid">
                 @foreach ($engagements as $model)
-                    <article class="card" data-reveal style="--i: {{ $loop->index }}">
+                    <article class="card spotlight" data-spotlight data-reveal style="--i: {{ $loop->index }}">
                         <p class="label label--accent">{{ $model['fit'] }}</p>
                         <h3 class="h3">{{ $model['name'] }}</h3>
                         <p>{{ $model['body'] }}</p>
@@ -72,12 +72,12 @@
         </div>
     </section>
 
-    <section class="section theme-paper" aria-labelledby="next-title">
+    <section class="section section--alt" aria-labelledby="next-title">
         <div class="container">
             <div class="section-head">
                 <div>
                     <x-eyebrow>First steps</x-eyebrow>
-                    <h2 class="h1" id="next-title">What happens when you get in touch.</h2>
+                    <h2 class="h1" id="next-title" data-split>What happens when you get in touch.</h2>
                 </div>
             </div>
             @include('partials.next-steps')

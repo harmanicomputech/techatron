@@ -1,0 +1,127 @@
+/* ==========================================================================
+   Layout
+   ========================================================================== */
+
+.container {
+    width: 100%;
+    max-width: calc(var(--container) + var(--gutter) * 2);
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+}
+
+.section {
+    position: relative;
+    padding-block: var(--section);
+    background: var(--bg);
+    color: var(--fg);
+}
+
+.section--alt {
+    background: var(--bg-alt);
+}
+
+.section--brand {
+    background:
+        radial-gradient(80% 120% at 100% 0%, rgb(24 182 255 / 0.35), transparent 55%),
+        radial-gradient(70% 90% at 0% 100%, rgb(124 92 255 / 0.3), transparent 60%),
+        var(--blue-500);
+}
+
+.section--tight {
+    padding-block: calc(var(--section) * 0.6);
+}
+
+.section--flush-top {
+    padding-top: 0;
+}
+
+.section--rounded {
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+    margin-top: calc(var(--radius-xl) * -1);
+    z-index: 1;
+}
+
+.grid-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+        linear-gradient(var(--grid-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 64px 64px;
+    background-position: center top;
+    mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, #000 30%, transparent 75%);
+}
+
+.dot-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: radial-gradient(var(--line-strong) 1px, transparent 1px);
+    background-size: 22px 22px;
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 20%, transparent 75%);
+    opacity: 0.7;
+}
+
+.section-head {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr);
+    gap: 1.5rem clamp(2rem, 6vw, 6rem);
+    align-items: end;
+    margin-bottom: clamp(3rem, 6vw, 5rem);
+}
+
+.section-head--center {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+    max-width: 52rem;
+    margin-inline: auto;
+}
+
+.section-head--center .lead {
+    margin-inline: auto;
+}
+
+.section-head .lead {
+    margin-bottom: 0.3em;
+}
+
+@media (max-width: 860px) {
+    .section-head {
+        grid-template-columns: 1fr;
+    }
+}
+
+.split {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    gap: 2rem clamp(2rem, 6vw, 6rem);
+}
+
+.split__aside {
+    position: sticky;
+    top: calc(var(--header-h) + 2rem);
+    align-self: start;
+}
+
+@media (max-width: 860px) {
+    .split {
+        grid-template-columns: 1fr;
+    }
+
+    .split__aside {
+        position: static;
+    }
+}
+
+.stack > * + * {
+    margin-top: var(--stack, 1.25rem);
+}
+
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+}

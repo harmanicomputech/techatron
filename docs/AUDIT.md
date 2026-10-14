@@ -109,3 +109,47 @@ These materially affect the outcome:
 8. **Commercial practices.** Confirm the engagement models on `/approach` and the commitments in the copy (support after launch, documentation and handover). Does the client own the code and IP?
 9. **Old URLs.** An export of the old sitemap or Search Console pages, so every valuable URL can be redirected.
 10. **Privacy notice.** The notice is written for the Nigeria Data Protection Act 2023 and describes what this site actually does. It should be reviewed by your legal adviser before launch.
+
+---
+
+## Revision 2 — brand, agency positioning and motion (14 October 2026)
+
+**Owner feedback:**
+
+- Use the supplied logo, with the logo's blue as the primary colour.
+- Light background by default, with a dark mode that uses the logo's charcoal, not black.
+- Much richer animation, parallax and modern effects.
+- Lead with "full digital agency", with websites, software and mobile apps as the specialties.
+- Add digital agency services such as digital campaigns.
+
+**What changed:**
+
+- **Brand.**
+  - Primary colour `#0B34B7` and charcoal `#282828`, both sampled from the logo.
+  - The logo's eclipse mark (charcoal circle behind a blue one) became the visual motif: the hero orb, page heroes, the CTA and the favicon.
+  - A recoloured wordmark is used in dark mode.
+  - Display type changed to Sora, a geometric face that suits the wide wordmark; Geist remains for text.
+- **Theme.**
+  - Light by default; dark mode on a charcoal base.
+  - Toggle in the header, remembered in `localStorage` and applied before first paint, with a circular reveal transition.
+- **Positioning.** The homepage now leads with "We build websites / software / mobile apps / campaigns that grow your business". Services are grouped as:
+  - Our specialty: websites, software and mobile apps
+  - Digital agency: digital campaigns & marketing; brand, UI & UX design (new)
+  - Technology: cloud, integration, managed IT, cybersecurity and consulting
+- **Motion:**
+  - GSAP (ScrollTrigger, SplitText) and Lenis smooth scrolling
+  - hero intro and rotating headline
+  - a layered device scene with pointer and scroll parallax
+  - a velocity-skewed marquee and 3D tilt and spotlight cards
+  - a scroll-scrubbed statement and a pinned horizontal services gallery
+  - a campaign dashboard whose chart lines draw on scroll
+  - stacking process cards and a footer wordmark reveal
+  - magnetic buttons, a custom cursor, cross-page View Transitions and a scroll progress bar
+- **Accessibility and performance.**
+  - All motion is disabled under `prefers-reduced-motion`, and the site still works fully without JavaScript.
+  - JS is about 56 KB gzipped (GSAP and Lenis) and CSS about 15 KB.
+
+**New open questions:**
+
+- Is a higher-resolution or SVG version of the logo available? The supplied PNG is 332 × 52, which is fine for the header but limits larger uses.
+- Confirm the scope of the digital marketing offer: which channels, and whether content creation and ad spend management are included.

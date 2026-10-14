@@ -1,6 +1,8 @@
 # Techatron Consulting — website
 
-The corporate website for Techatron Consulting Limited. It is built with Laravel 13, Blade, hand-written CSS and vanilla JavaScript, bundled with Vite.
+The website for Techatron Consulting Limited, a full-service digital agency specialising in website, software and mobile app development.
+
+It is built with Laravel 13, Blade and hand-written CSS, bundled with Vite. Motion uses GSAP (ScrollTrigger, SplitText) and Lenis. The site is light by default, with a charcoal dark mode, and every animation respects `prefers-reduced-motion`.
 
 See [`docs/AUDIT.md`](docs/AUDIT.md) for the audit, the creative direction and the open questions.
 
@@ -32,7 +34,7 @@ All copy lives in `resources/content/`:
 
 | File | What it controls |
 |---|---|
-| `services.php` | The services: the homepage explorer, `/services`, every service page, navigation and footer |
+| `services.php` | Services, grouped as `specialty` (websites, software, mobile), `digital` (campaigns, brand/UI-UX) and `technology`. They drive the homepage, `/services`, every service page, navigation and footer. |
 | `challenges.php` | The "Recognise any of these?" problem list |
 | `approach.php` | Delivery phases (homepage timeline and `/approach`) |
 | `principles.php` | Engineering standards |

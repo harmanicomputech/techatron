@@ -23,6 +23,12 @@ class Content
             ->map(fn (array $service, string $slug) => ['slug' => $slug] + $service);
     }
 
+    /** Services in a group: specialty, digital or technology. */
+    public function servicesIn(string $group): Collection
+    {
+        return $this->services()->where('group', $group);
+    }
+
     public function service(string $slug): ?array
     {
         return $this->services()->get($slug);

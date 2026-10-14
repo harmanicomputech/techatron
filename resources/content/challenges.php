@@ -8,9 +8,29 @@
 
 return [
     [
+        'title' => 'Your website is not winning you business',
+        'body' => 'It looks dated, loads slowly, breaks on phones, or simply does not show up when customers search for what you do.',
+        'service' => 'website-development',
+    ],
+    [
         'title' => 'Critical work lives in spreadsheets',
         'body' => 'Orders, approvals and reporting depend on files passed around by email, and on the one person who understands them.',
-        'service' => 'custom-software',
+        'service' => 'software-development',
+    ],
+    [
+        'title' => 'Customers expect to do it on their phone',
+        'body' => 'Your service works at a counter or on a desktop, but your customers and field teams are mobile.',
+        'service' => 'mobile-app-development',
+    ],
+    [
+        'title' => 'Marketing spend without clear results',
+        'body' => 'You are posting and paying for ads, but nobody can say which channel actually brings in customers.',
+        'service' => 'digital-marketing',
+    ],
+    [
+        'title' => 'Your brand looks different everywhere',
+        'body' => 'Website, social pages and documents all tell a slightly different story, and none of them look premium.',
+        'service' => 'brand-and-design',
     ],
     [
         'title' => 'Your systems do not talk to each other',
@@ -18,17 +38,7 @@ return [
         'service' => 'systems-integration',
     ],
     [
-        'title' => 'Customers expect to do it on their phone',
-        'body' => 'Your service works at a counter or on a desktop, but your customers and field teams are mobile.',
-        'service' => 'mobile-apps',
-    ],
-    [
-        'title' => 'Infrastructure is a single point of failure',
-        'body' => 'One server, untested backups and a hosting bill nobody can explain.',
-        'service' => 'cloud-infrastructure',
-    ],
-    [
-        'title' => 'Nobody owns IT',
+        'title' => 'Nobody owns IT or security',
         'body' => 'Support is ad hoc, updates are skipped and access is never revoked when people leave.',
         'service' => 'managed-it',
     ],

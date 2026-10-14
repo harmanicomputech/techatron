@@ -29,7 +29,7 @@ class EnquiryTest extends TestCase
             'email' => 'ada@example.com',
             'organisation' => 'Obi Logistics',
             'phone' => '+234 801 234 5678',
-            'services' => ['custom-software', 'systems-integration'],
+            'services' => ['software-development', 'digital-marketing'],
             'stage' => 'planning',
             'timeline' => '1-3-months',
             'message' => 'We need to replace our spreadsheet-based dispatch process with a proper system.',
@@ -46,7 +46,7 @@ class EnquiryTest extends TestCase
             ->assertSessionHas('enquiry_sent', 'Ada Obi');
 
         $enquiry = Enquiry::sole();
-        $this->assertSame(['custom-software', 'systems-integration'], $enquiry->services);
+        $this->assertSame(['software-development', 'digital-marketing'], $enquiry->services);
         $this->assertNotNull($enquiry->notified_at);
 
         Mail::assertSent(EnquiryReceived::class, fn ($mail) => $mail->hasTo('enquiries@example.test')

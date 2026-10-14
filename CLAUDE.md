@@ -1,6 +1,6 @@
 # Techatron Consulting website
 
-Corporate website for Techatron Consulting Limited (software engineering and technology consulting, Lagos). Laravel 13, Blade, hand-written CSS and vanilla JS built with Vite. No CSS or JS framework.
+Website for Techatron Consulting Limited, a full-service digital agency in Lagos specialising in website, software and mobile app development. Laravel 13, Blade, hand-written CSS, and JS built with Vite. Motion uses GSAP (ScrollTrigger, SplitText) and Lenis; there is no CSS or UI framework.
 
 ## Commands
 
@@ -11,14 +11,23 @@ Corporate website for Techatron Consulting Limited (software engineering and tec
 
 ## Layout
 
-- `resources/content/*.php` — all site copy (services, approach, challenges, principles, engagements, platforms, work, testimonials, insights). Edit copy here, not in templates. Read through `App\Support\Content`.
+- `resources/content/*.php` — all site copy (services, approach, challenges, principles, engagements, platforms, work, testimonials, insights). Edit copy here, not in templates. Read through `App\Support\Content`. Each service has a `group`: `specialty` (websites, software, mobile — always first), `digital` (campaigns, brand/UI-UX) or `technology`.
 - `config/site.php` — company details; contact details come from `.env` and are hidden when blank
 - `routes/web.php` — pages, contact form, sitemap/robots, legacy redirects (redirects must stay above `/services/{slug}`)
 - `app/Http/Controllers/` — thin controllers; `EnquiryController` + `StoreEnquiryRequest` handle the project brief form
 - `resources/views/layouts/app.blade.php` — `<head>`: titles, canonical, Open Graph, Organization JSON-LD. Pages set `@section('title')`, `@section('description')`, optional `@push('schema')`
-- `resources/views/components/` — `x-icon`, `x-glyph`, `x-eyebrow`, `x-page-hero`, `x-cta`, `x-logo-mark`
-- `resources/css/app.css` — design tokens at the top; `.theme-paper` flips a section to the light palette by redefining semantic tokens (`--bg`, `--fg`, `--accent-text`, …). Use semantic tokens in components, never raw palette values.
-- `resources/js/app.js` — progressive enhancement only (menus, tabs, reveal, timeline, form validation). Every page must work without JS.
+- `resources/views/components/` — `x-icon`, `x-glyph`, `x-eyebrow`, `x-page-hero`, `x-cta`
+- `resources/css/app.css` imports `resources/css/partials/*.css`. `tokens.css` holds the brand colours (blue `#0B34B7`, charcoal `#282828`, both from the logo) and the semantic tokens.
+  - Light is the default theme. `[data-theme="dark"]` on `<html>` switches to charcoal, never black.
+  - `.section--alt`, `.section--ink` and `.section--brand` re-theme a section by redefining semantic tokens.
+  - Components use semantic tokens (`--bg`, `--fg`, `--accent`, `--accent-text`, …), never raw palette values.
+- `public/js/theme.js` applies the saved theme before first paint. `resources/js/modules/theme.js` runs the toggle, with a circular View Transition reveal.
+- `resources/js/modules/motion.js` — every animation is opt-in through data attributes:
+  - `data-reveal`, `data-split` (do not use on headings that contain gradient text), `data-scrub` and `data-parallax`
+  - `data-depth` (hero pointer parallax), `data-tilt`, `data-spotlight`, `data-magnetic` and `data-cursor="Label"`
+  - `data-hscroll` (pinned horizontal scroll) and `data-stack` (stacking cards)
+- All motion is skipped under `prefers-reduced-motion`, and pages must stay complete without JS: hidden states are set by JS, never by CSS alone.
+- Logos: `public/images/logo.png` (light) and `logo-dark.png` (recoloured wordmark). The favicon is the eclipse mark as SVG.
 - `app/Http/Middleware/SecurityHeaders.php` — CSP and security headers. The CSP forbids inline scripts (JSON-LD data blocks are fine) and third-party origins; update it if you add an external service.
 - `docs/AUDIT.md` — Phase 1 audit, design rationale, open questions
 

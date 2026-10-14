@@ -15,9 +15,9 @@ return [
 
     'name' => 'Techatron Consulting',
     'legal_name' => env('SITE_LEGAL_NAME', 'Techatron Consulting Limited'),
-    'tagline' => 'Software engineering and technology consulting',
+    'tagline' => 'Full-service digital agency',
 
-    'description' => 'Techatron Consulting designs, builds and supports custom software, mobile apps and cloud infrastructure for organisations that depend on technology to run.',
+    'description' => 'Techatron is a full-service digital agency in Lagos specialising in website, software and mobile app development, with the design, digital campaigns and technology support to help them grow.',
 
     'contact' => [
         // Where project enquiries are delivered. Not shown on the site.

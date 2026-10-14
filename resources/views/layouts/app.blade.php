@@ -53,7 +53,8 @@
     <meta property="og:locale" content="en_GB">
     <meta name="twitter:card" content="summary_large_image">
 
-    <meta name="theme-color" content="#06080b">
+    <meta name="theme-color" content="#ffffff">
+    <script src="{{ asset('js/theme.js') }}"></script>
     <link rel="icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
     <link rel="icon" href="{{ asset('favicon.ico') }}" sizes="32x32">
     <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon.png') }}">
@@ -65,6 +66,7 @@
 </head>
 <body>
     <a class="skip-link" href="#main">Skip to content</a>
+    <div class="scroll-progress" aria-hidden="true" data-progress></div>
 
     @include('partials.header')
 
@@ -73,5 +75,10 @@
     </main>
 
     @include('partials.footer')
+
+    <div class="cursor is-hidden" aria-hidden="true" data-cursor-el>
+        <div class="cursor__ring"><span class="cursor__label"></span></div>
+        <div class="cursor__dot"></div>
+    </div>
 </body>
 </html>

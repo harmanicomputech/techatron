@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Discuss your project')
-@section('description', 'Tell Techatron Consulting about your software, mobile, cloud or IT challenge. A short brief is enough to start the conversation.')
+@section('title', 'Start a project')
+@section('description', 'Tell Techatron about your website, software, mobile app or digital campaign. A short brief is enough to start the conversation.')
 
 @section('content')
     @php($contact = config('site.contact'))
@@ -9,8 +9,8 @@
     <x-page-hero
         :crumbs="['Contact' => null]"
         eyebrow="Start a conversation"
-        title="Tell us what you are trying to achieve."
-        lead="A few sentences are enough to start. The more context you share, the more useful our first reply will be, but you do not need a specification." />
+        title="Let’s build something remarkable together."
+        lead="Tell us what you want to launch, fix or grow. A few sentences are enough to start; the more context you share, the more useful our first reply will be." />
 
     <section class="section section--flush-top" id="enquiry" aria-label="Project enquiry">
         <div class="container contact-layout">
@@ -29,6 +29,7 @@
                         </div>
                     </div>
                 @else
+                    <div class="contact-card" data-reveal>
                     <form class="form" method="POST" action="{{ route('contact.store') }}" data-enquiry novalidate>
                         @csrf
                         <input type="hidden" name="started" value="{{ $started }}">
@@ -58,15 +59,20 @@
                         <div class="form__section">
                             <fieldset class="field">
                                 <legend>What can we help with? <span class="optional">(choose any)</span></legend>
-                                <div class="choice-grid">
-                                    @foreach ($services as $service)
-                                        <label class="choice">
-                                            <input type="checkbox" name="services[]" value="{{ $service['slug'] }}"
-                                                @checked(in_array($service['slug'], old('services', $selected), true))>
-                                            <span>{{ $service['short'] }}</span>
-                                        </label>
-                                    @endforeach
-                                </div>
+                                @foreach (['specialty' => 'Development', 'digital' => 'Digital agency', 'technology' => 'Technology'] as $group => $groupLabel)
+                                    <div class="choice-group">
+                                        <span class="label">{{ $groupLabel }}</span>
+                                        <div class="choice-grid">
+                                            @foreach ($services->where('group', $group) as $service)
+                                                <label class="choice">
+                                                    <input type="checkbox" name="services[]" value="{{ $service['slug'] }}"
+                                                        @checked(in_array($service['slug'], old('services', $selected), true))>
+                                                    <span>{{ $service['short'] }}</span>
+                                                </label>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                @endforeach
                                 @error('services')<p class="error">{{ $message }}</p>@enderror
                             </fieldset>
 
@@ -113,15 +119,16 @@
 
                         <div class="form__submit">
                             <button class="btn btn--primary btn--lg" type="submit">
-                                Send your brief <x-icon name="arrow" class="arrow" /><span class="spinner" aria-hidden="true"></span>
+                                <span class="btn__label">Send your brief</span> <x-icon name="arrow" class="arrow" /><span class="spinner" aria-hidden="true"></span>
                             </button>
                             <p class="dim" style="font-size: var(--text-sm)">No newsletters. No sharing your details.</p>
                         </div>
                     </form>
+                    </div>
                 @endif
             </div>
 
-            <aside class="contact-aside" aria-label="Other ways to reach us">
+            <aside class="contact-aside" aria-label="Other ways to reach us" data-reveal>
                 <div class="next-step">
                     <p class="label label--accent">What happens next</p>
                     <ol class="process-list">

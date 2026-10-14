@@ -28,6 +28,11 @@ class AppServiceProvider extends ServiceProvider
 
             $view->with([
                 'navServices' => $content->services(),
+                'navGroups' => [
+                    'Our specialty' => $content->servicesIn('specialty'),
+                    'Digital agency' => $content->servicesIn('digital'),
+                    'Technology' => $content->servicesIn('technology'),
+                ],
                 'hasWork' => $content->work()->isNotEmpty(),
                 'hasInsights' => $content->insights()->isNotEmpty(),
             ]);

@@ -22,7 +22,11 @@ Route::permanentRedirect('/projects', '/work');
 Route::permanentRedirect('/blog', '/insights');
 Route::permanentRedirect('/privacy-policy', '/privacy');
 Route::permanentRedirect('/services/managed-services', '/services/managed-it');
-Route::permanentRedirect('/services/mobile-development', '/services/mobile-apps');
+Route::permanentRedirect('/services/mobile-development', '/services/mobile-app-development');
+Route::permanentRedirect('/services/mobile-apps', '/services/mobile-app-development');
+Route::permanentRedirect('/services/custom-software', '/services/software-development');
+Route::permanentRedirect('/services/web-development', '/services/website-development');
+Route::permanentRedirect('/services/digital-marketing-services', '/services/digital-marketing');
 Route::permanentRedirect('/services/cloud-services', '/services/cloud-infrastructure');
 Route::permanentRedirect('/services/data-center', '/services/cloud-infrastructure');
 

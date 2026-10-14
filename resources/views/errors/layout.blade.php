@@ -4,6 +4,11 @@
 
 @section('content')
     <section class="error-page">
+        <div class="hero__bg" aria-hidden="true">
+            <div class="blob blob--1"></div>
+            <div class="blob blob--2"></div>
+            <div class="grid-bg"></div>
+        </div>
         <div class="container">
             <p class="code" aria-hidden="true">@yield('code')</p>
             <h1 class="h1" style="margin: 1rem 0 1.25rem">@yield('heading')</h1>

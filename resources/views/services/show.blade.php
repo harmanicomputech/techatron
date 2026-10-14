@@ -33,9 +33,9 @@
         :eyebrow="$service['index'].' / '.$service['name']"
         :title="$service['headline']"
         :lead="$service['summary']">
-        <div class="actions" style="margin-top: 2.5rem">
-            <a class="btn btn--primary btn--lg" href="{{ route('contact', ['service' => $service['slug']]) }}">Discuss your project <x-icon name="arrow" class="arrow" /></a>
-            <a class="btn btn--lg" href="#approach">How we deliver</a>
+        <div class="actions" style="margin-top: 2.5rem" data-reveal>
+            <a class="btn btn--primary btn--lg" href="{{ route('contact', ['service' => $service['slug']]) }}" data-magnetic><span class="btn__label">Start your project</span> <x-icon name="arrow" class="arrow" /></a>
+            <a class="btn btn--lg" href="#approach" data-magnetic><span class="btn__label">How we deliver</span></a>
         </div>
     </x-page-hero>
 
@@ -43,10 +43,10 @@
         <div class="container split">
             <div class="split__aside">
                 <x-eyebrow>The challenge</x-eyebrow>
-                <h2 class="h2" id="problem-title">Why organisations come to us</h2>
+                <h2 class="h2" id="problem-title" data-split>Why organisations come to us</h2>
             </div>
             <div>
-                <p class="statement__text" style="font-size: var(--text-xl); max-width: none" data-reveal>{{ $service['problem'] }}</p>
+                <p class="problem h3" style="font-weight: 500; color: var(--fg)" data-reveal>{{ $service['problem'] }}</p>
                 <div class="fact-grid" style="margin-top: 3rem">
                     <div data-reveal>
                         <h3 class="label">Who it is for</h3>
@@ -61,11 +61,11 @@
         </div>
     </section>
 
-    <section class="section theme-paper" aria-labelledby="capabilities-title">
+    <section class="section section--alt" aria-labelledby="capabilities-title">
         <div class="container split">
             <div class="split__aside">
                 <x-eyebrow>What we do</x-eyebrow>
-                <h2 class="h2" id="capabilities-title">Capabilities</h2>
+                <h2 class="h2" id="capabilities-title" data-split>Capabilities</h2>
                 <p class="muted" style="margin-top: 1rem">Engagements are shaped around your situation. These are the building blocks we most often combine.</p>
             </div>
             <div>
@@ -77,7 +77,7 @@
                         </li>
                     @endforeach
                 </ol>
-                <div class="panel" style="margin-top: 3rem" data-reveal>
+                <div class="panel spotlight" style="margin-top: 3rem" data-spotlight data-reveal>
                     <h3 class="label label--accent" style="margin-bottom: 1.25rem">Typical deliverables</h3>
                     <ul class="ticks" style="grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: 0.85rem 2rem">
                         @foreach ($service['deliverables'] as $item)<li>{{ $item }}</li>@endforeach
@@ -92,7 +92,7 @@
             <div class="section-head">
                 <div>
                     <x-eyebrow>How we deliver</x-eyebrow>
-                    <h2 class="h1" id="approach-title">A process designed to remove risk early.</h2>
+                    <h2 class="h1" id="approach-title" data-split>A process designed to remove risk early.</h2>
                 </div>
                 <div>
                     <p class="lead" style="margin-bottom: 1.5rem">Every engagement follows the same disciplined path, scaled to the size of the work.</p>
@@ -139,7 +139,7 @@
             </div>
             <div class="card-grid">
                 @foreach ($related as $item)
-                    <article class="card" data-reveal style="--i: {{ $loop->index }}">
+                    <article class="card spotlight" data-spotlight data-reveal style="--i: {{ $loop->index }}">
                         <p class="label label--accent">{{ $item['index'] }}</p>
                         <h3 class="h4">{{ $item['name'] }}</h3>
                         <p>{{ $item['summary'] }}</p>
