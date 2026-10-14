@@ -1,0 +1,47 @@
+TECHATRON WEBSITE - DIRECTADMIN INSTALL
+=======================================
+
+Requirements: PHP 8.3 or newer (DirectAdmin > Select PHP version / PHP
+Selector). Extensions: pdo_sqlite, mbstring, openssl, fileinfo, intl.
+
+The zip contains two folders:
+
+  techatron_app/   the Laravel application (must NOT be inside public_html)
+  public_html/     the public files (index.php, .htaccess, build/, images/)
+
+
+OPTION A - Preview on a subdomain (recommended, live site untouched)
+-------------------------------------------------------------------
+1. DirectAdmin > Subdomain Management > create e.g. "preview".
+   Its folder is domains/YOURDOMAIN/public_html/preview
+2. File Manager > domains/YOURDOMAIN/  > upload the zip > Extract.
+   You now have domains/YOURDOMAIN/techatron_app and a public_html folder
+   from the zip merged into yours. To keep your live site untouched,
+   extract to a temporary folder instead, then:
+     - move "techatron_app" to domains/YOURDOMAIN/techatron_app
+     - move everything inside the zip's "public_html" (including the
+       hidden .htaccess) into domains/YOURDOMAIN/public_html/preview
+3. Visit https://preview.YOURDOMAIN
+
+
+OPTION B - Replace the main site
+--------------------------------
+1. Back up your current public_html.
+2. Upload and extract the zip in domains/YOURDOMAIN/ so that
+   techatron_app sits beside public_html, and the zip's public_html
+   contents land in your public_html.
+3. Edit techatron_app/.env: APP_ENV=production (lets search engines in).
+
+
+AFTER INSTALLING
+----------------
+- Permissions: techatron_app/storage and techatron_app/database (and the
+  database.sqlite file inside it) must be writable by PHP (755/644 is
+  normally fine on DirectAdmin; use 775/664 if you see errors).
+- Email: put your SMTP details in techatron_app/.env (MAIL_MAILER=smtp,
+  MAIL_HOST, MAIL_PORT, MAIL_USERNAME, MAIL_PASSWORD) so enquiries are
+  emailed to CONTACT_INBOX. Until then they are saved in the database and
+  logged in techatron_app/storage/logs/laravel.log.
+- If you see a 500 error, check techatron_app/storage/logs/laravel.log.
+- The .env file contains a secret APP_KEY. Never put techatron_app inside
+  public_html.
