@@ -146,12 +146,13 @@ return [
             'Brands that want consistent, professional social presence',
             'Teams spending on ads without clear results',
         ],
+        // Scope confirmed by Techatron: SEO, social media, paid ads,
+        // content and email, analytics.
         'capabilities' => [
             'Search engine optimisation (SEO)',
             'Social media strategy and management',
             'Paid search and social advertising',
             'Content and email marketing',
-            'Campaign landing pages',
             'Analytics, tracking and conversion reporting',
         ],
         'value' => [
@@ -161,7 +162,7 @@ return [
         ],
         'deliverables' => [
             'Audience, channel and campaign plan',
-            'Creative, copy and landing pages',
+            'Creative, content and copy',
             'Tracking and analytics set-up',
             'Regular performance reports and recommendations',
         ],

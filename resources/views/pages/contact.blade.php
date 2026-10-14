@@ -137,15 +137,19 @@
                         <li><span><strong>You receive a proposal</strong>Scope, approach, timeline and cost in writing.</span></li>
                     </ol>
                 </div>
-                @if ($contact['email'] || $contact['phone'] || $contact['address'] || $contact['city'])
+                @if ($contact['email'] || $contact['phones'] || $contact['address'] || $contact['city'])
                     <div class="next-step">
                         <p class="label label--accent">Direct contact</p>
                         <dl class="contact-channels">
                             @if ($contact['email'])
                                 <div><dt>Email</dt><dd><a class="text-link" href="mailto:{{ $contact['email'] }}">{{ $contact['email'] }}</a></dd></div>
                             @endif
-                            @if ($contact['phone'])
-                                <div><dt>Phone</dt><dd><a class="text-link" href="tel:{{ preg_replace('/[^0-9+]/', '', $contact['phone']) }}">{{ $contact['phone'] }}</a></dd></div>
+                            @if ($contact['phones'])
+                                <div><dt>Phone</dt><dd>
+                                    @foreach ($contact['phones'] as $phone)
+                                        <a class="text-link" href="tel:{{ \App\Support\Phone::e164($phone) }}">{{ \App\Support\Phone::display($phone) }}</a>@if (! $loop->last)<br>@endif
+                                    @endforeach
+                                </dd></div>
                             @endif
                             @if ($contact['whatsapp'])
                                 <div><dt>WhatsApp</dt><dd><a class="text-link" href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $contact['whatsapp']) }}" rel="noopener" target="_blank">{{ $contact['whatsapp'] }}<span class="sr-only"> (opens in a new tab)</span></a></dd></div>
@@ -154,6 +158,10 @@
                                 <div><dt>Office</dt><dd><address style="font-style: normal">{{ collect([$contact['address'], $contact['city'], $contact['country']])->filter()->implode(', ') }}</address></dd></div>
                             @endif
                         </dl>
+                        @if (config('site.social'))
+                            <p class="label" style="margin: 1.5rem 0 0.75rem">Follow us</p>
+                            @include('partials.socials')
+                        @endif
                     </div>
                 @endif
             </aside>

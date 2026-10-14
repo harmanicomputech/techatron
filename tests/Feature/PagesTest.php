@@ -129,6 +129,28 @@ class PagesTest extends TestCase
         $this->assertSame($content->services()->count(), $content->services()->whereIn('group', ['specialty', 'digital', 'technology'])->count());
     }
 
+    public function test_contact_details_and_social_links_are_published(): void
+    {
+        foreach (['/', '/contact'] as $uri) {
+            $this->get($uri)
+                ->assertSee('href="tel:+2349022016978"', false)
+                ->assertSee('href="tel:+2347045414419"', false)
+                ->assertSee('0902 201 6978')
+                ->assertSee('13 Adepele Street, Ikeja, Lagos, Nigeria')
+                ->assertSee('mailto:hello@techatronagency.com', false)
+                ->assertSee('https://www.tiktok.com/@techatronconsultingltd', false)
+                ->assertSee('https://www.linkedin.com/company/techatron-consulting-limited/', false)
+                ->assertSee('https://web.facebook.com/techatronconsultingltd', false)
+                ->assertSee('https://x.com/techatronagency', false)
+                ->assertSee('https://www.instagram.com/techatronconsultingltd/', false);
+        }
+
+        $this->get('/')
+            ->assertSee('"telephone":"+2349022016978"', false)
+            ->assertSee('"streetAddress":"13 Adepele Street, Ikeja"', false)
+            ->assertSee('"sameAs":["https://www.linkedin.com/company/techatron-consulting-limited/"', false);
+    }
+
     public function test_contact_page_preselects_a_valid_service_from_the_query(): void
     {
         $html = $this->get('/contact?service=cybersecurity')->assertOk()->getContent();

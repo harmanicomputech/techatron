@@ -153,3 +153,30 @@ These materially affect the outcome:
 
 - Is a higher-resolution or SVG version of the logo available? The supplied PNG is 332 × 52, which is fine for the header but limits larger uses.
 - Confirm the scope of the digital marketing offer: which channels, and whether content creation and ad spend management are included.
+
+---
+
+## Revision 3 — confirmed contact details and campaign scope
+
+**Confirmed by Techatron and now published:**
+
+- **Address:** 13 Adepele Street, Ikeja, Lagos.
+- **Phone:** 0902 201 6978 and 0704 541 4419. Shown with `tel:` links in international format (`+234…`) and in the Organization structured data as contact points.
+- **Email:** hello@techatronagency.com.
+- **Social profiles:** LinkedIn, Instagram, X, Facebook and TikTok. Shown as icons in the footer, on the contact page and in the mobile menu, and listed in the structured data as `sameAs`.
+- **Digital Campaigns & Marketing scope:** SEO, social media, paid ads, content and email, analytics. Landing pages remain part of Website Development.
+
+These are defaults in `config/site.php`, so they work without any `.env` setup; environment variables can still override them.
+
+**Resolved from the earlier open questions:** contact details and digital marketing scope.
+
+**Still open:**
+
+- case studies and testimonials
+- whether there is a WhatsApp number (none is shown)
+- a reply time you are happy to promise
+- the founding year
+- any real certifications or partnerships
+- the delivery technology stack
+- an SVG or larger version of the logo
+- legal review of the privacy notice

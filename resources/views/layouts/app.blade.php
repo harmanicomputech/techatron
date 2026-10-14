@@ -16,7 +16,14 @@
         'logo' => asset('images/logo.png'),
         'description' => config('site.description'),
         'email' => $contact['email'] ?: null,
-        'telephone' => $contact['phone'] ?: null,
+        'telephone' => $contact['phones'] ? \App\Support\Phone::e164($contact['phones'][0]) : null,
+        'contactPoint' => collect($contact['phones'])->map(fn ($phone) => [
+            '@type' => 'ContactPoint',
+            'telephone' => \App\Support\Phone::e164($phone),
+            'contactType' => 'customer service',
+            'areaServed' => $contact['country_code'],
+            'availableLanguage' => 'English',
+        ])->all() ?: null,
         'foundingDate' => config('site.founded') ?: null,
         'address' => array_filter([
             '@type' => 'PostalAddress',

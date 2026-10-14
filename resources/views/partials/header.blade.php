@@ -81,4 +81,11 @@
         </div>
     </div>
     <a class="btn btn--primary btn--lg btn--block" href="{{ route('contact') }}">Start a project <x-icon name="arrow" class="arrow" /></a>
+    <div class="mobile-nav__contact">
+        @foreach (config('site.contact.phones') as $phone)
+            <a href="tel:{{ \App\Support\Phone::e164($phone) }}"><x-icon name="phone" /> {{ \App\Support\Phone::display($phone) }}</a>
+        @endforeach
+        @if ($email = config('site.contact.email'))<a href="mailto:{{ $email }}"><x-icon name="mail" /> {{ $email }}</a>@endif
+        @include('partials.socials')
+    </div>
 </div>

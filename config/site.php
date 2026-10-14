@@ -23,26 +23,29 @@ return [
         // Where project enquiries are delivered. Not shown on the site.
         'inbox' => env('CONTACT_INBOX') ?: env('MAIL_FROM_ADDRESS'),
 
-        // Public contact details. Leave blank to hide.
-        'email' => env('CONTACT_EMAIL', 'hello@techatronagency.com'),
-        'phone' => env('CONTACT_PHONE'),
+        // Public contact details, confirmed by Techatron. Environment values
+        // override them; a blank value keeps the default.
+        'email' => env('CONTACT_EMAIL') ?: 'hello@techatronagency.com',
+        // Comma-separated, in local format; shown in order.
+        'phones' => array_values(array_filter(array_map('trim', explode(',', env('CONTACT_PHONES') ?: '09022016978,07045414419')))),
         'whatsapp' => env('CONTACT_WHATSAPP'),
-        'address' => env('CONTACT_ADDRESS'),
-        'city' => env('CONTACT_CITY', 'Lagos'),
-        'country' => env('CONTACT_COUNTRY', 'Nigeria'),
-        'country_code' => env('CONTACT_COUNTRY_CODE', 'NG'),
+        'address' => env('CONTACT_ADDRESS') ?: '13 Adepele Street, Ikeja',
+        'city' => env('CONTACT_CITY') ?: 'Lagos',
+        'country' => env('CONTACT_COUNTRY') ?: 'Nigeria',
+        'country_code' => env('CONTACT_COUNTRY_CODE') ?: 'NG',
 
         // e.g. "within one business day". Leave blank to make no promise.
         'response_time' => env('CONTACT_RESPONSE_TIME'),
     ],
 
-    'social' => array_filter([
-        'LinkedIn' => env('SOCIAL_LINKEDIN'),
-        'X' => env('SOCIAL_X'),
-        'GitHub' => env('SOCIAL_GITHUB'),
-        'Instagram' => env('SOCIAL_INSTAGRAM'),
-        'Facebook' => env('SOCIAL_FACEBOOK'),
-    ]),
+    // Keys must match an icon in resources/views/components/social-icon.blade.php.
+    'social' => [
+        'LinkedIn' => env('SOCIAL_LINKEDIN') ?: 'https://www.linkedin.com/company/techatron-consulting-limited/',
+        'Instagram' => env('SOCIAL_INSTAGRAM') ?: 'https://www.instagram.com/techatronconsultingltd/',
+        'X' => env('SOCIAL_X') ?: 'https://x.com/techatronagency',
+        'Facebook' => env('SOCIAL_FACEBOOK') ?: 'https://web.facebook.com/techatronconsultingltd',
+        'TikTok' => env('SOCIAL_TIKTOK') ?: 'https://www.tiktok.com/@techatronconsultingltd',
+    ],
 
     // Year the company was founded. Blank hides it.
     'founded' => env('SITE_FOUNDED'),

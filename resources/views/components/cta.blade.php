@@ -14,8 +14,15 @@
                 <span class="btn__label">Start your project</span> <x-icon name="arrow" class="arrow" />
             </a>
         </div>
-        @if ($email = config('site.contact.email'))
-            <p class="cta-final__contact" data-reveal>Prefer email? <a href="mailto:{{ $email }}">{{ $email }}</a></p>
+        @php($email = config('site.contact.email'))
+        @php($phone = config('site.contact.phones')[0] ?? null)
+        @if ($email || $phone)
+            <p class="cta-final__contact" data-reveal>
+                Prefer to talk directly?
+                @if ($phone)Call <a href="tel:{{ \App\Support\Phone::e164($phone) }}">{{ \App\Support\Phone::display($phone) }}</a>@endif
+                @if ($phone && $email) or email @elseif ($email) Email @endif
+                @if ($email)<a href="mailto:{{ $email }}">{{ $email }}</a>@endif
+            </p>
         @endif
     </div>
 </section>

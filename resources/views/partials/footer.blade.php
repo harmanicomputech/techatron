@@ -9,6 +9,7 @@
                 </a>
                 <p>{{ config('site.description') }}</p>
                 <a class="btn btn--primary" href="{{ route('contact') }}" data-magnetic>Start a project <x-icon name="arrow" class="arrow" /></a>
+                <div style="margin-top: 1.75rem">@include('partials.socials')</div>
             </div>
 
             @foreach ($navGroups as $group => $items)
@@ -44,13 +45,12 @@
                 <h2 class="label" style="margin-top: 2rem">Get in touch</h2>
                 <ul>
                     @if ($contact['email'])<li><a href="mailto:{{ $contact['email'] }}">{{ $contact['email'] }}</a></li>@endif
-                    @if ($contact['phone'])<li><a href="tel:{{ preg_replace('/[^0-9+]/', '', $contact['phone']) }}">{{ $contact['phone'] }}</a></li>@endif
+                    @foreach ($contact['phones'] as $phone)
+                        <li><a href="tel:{{ \App\Support\Phone::e164($phone) }}">{{ \App\Support\Phone::display($phone) }}</a></li>
+                    @endforeach
                     @if ($contact['address'] || $contact['city'])
                         <li><address>{{ collect([$contact['address'], $contact['city'], $contact['country']])->filter()->implode(', ') }}</address></li>
                     @endif
-                    @foreach (config('site.social') as $network => $url)
-                        <li><a href="{{ $url }}" rel="noopener me" target="_blank">{{ $network }}<span class="sr-only"> (opens in a new tab)</span></a></li>
-                    @endforeach
                 </ul>
             </div>
         </div>
