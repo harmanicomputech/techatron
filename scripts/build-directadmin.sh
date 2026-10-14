@@ -18,7 +18,9 @@ echo "→ Exporting committed source"
 git -C "$ROOT" archive HEAD | tar -x -C "$APP"
 
 echo "→ Installing production PHP dependencies"
-composer install --working-dir="$APP" --no-dev --optimize-autoloader --no-interaction --no-progress --quiet
+composer install --working-dir="$APP" --no-dev --optimize-autoloader --prefer-dist --no-interaction --no-progress --quiet
+# Packages installed from source carry their git history; it is not needed.
+find "$APP/vendor" -name .git -type d -prune -exec rm -rf {} +
 
 echo "→ Building front-end assets"
 (cd "$APP" && npm ci --silent && npm run build --silent)
