@@ -1,6 +1,6 @@
 # Techatron Consulting website
 
-Website for Techatron Consulting Limited, a full-service digital agency in Lagos specialising in website, software and mobile app development. Laravel 13, Blade, hand-written CSS, and JS built with Vite. Typefaces: Bricolage Grotesque (variable, 800) for the homepage hero headline only (`--font-hero`), Poppins (400/500/600/700) for all other text, Geist Mono for small technical labels. Motion uses GSAP (ScrollTrigger, SplitText) and Lenis; there is no CSS or UI framework.
+Website for Techatron Consulting Limited, a full-service digital agency in Lagos specialising in website, software and mobile app development. Laravel 13, Blade, hand-written CSS, and JS built with Vite. Typefaces: Plus Jakarta Sans (variable, 800) for the homepage hero headline only (`--font-hero`), Poppins (400/500/600/700) for all other text, Geist Mono for small technical labels. Motion uses GSAP (ScrollTrigger, SplitText) and Lenis; there is no CSS or UI framework.
 
 ## Commands
 

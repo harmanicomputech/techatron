@@ -220,7 +220,7 @@ Logos are listed in `resources/content/clients.php`, with the files in `public/i
 
 ## Revision 6 — new hero: the build studio
 
-The homepage hero now has a centred headline, "Turn ideas into digital products people love.", set in Bricolage Grotesque ExtraBold. Below it sits an animated studio window:
+The homepage hero now has a centred headline, "Turn ideas into digital products people love.", set in Plus Jakarta Sans ExtraBold (chosen by the owner from a comparison of five pairings; the rest of the site stays in Poppins). Below it sits an animated studio window:
 
 - **Tabs:** Website, Mobile app and Software. They cycle every 7 seconds, and also work as accessible tabs with click and arrow-key support.
 - **Code pane:** each tab types out its own code.
