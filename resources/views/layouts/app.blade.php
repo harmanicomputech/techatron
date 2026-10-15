@@ -7,7 +7,6 @@
     $ogImage = asset(config('site.og_image'));
     $contact = config('site.contact');
     $organization = array_filter([
-        '@context' => 'https://schema.org',
         '@type' => 'Organization',
         '@id' => url('/').'#organization',
         'name' => config('site.legal_name'),
@@ -68,7 +67,7 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-    <script type="application/ld+json">{!! json_encode($organization, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG) !!}</script>
+    {{ \App\Support\Schema::script($organization) }}
     @stack('schema')
 </head>
 <body>

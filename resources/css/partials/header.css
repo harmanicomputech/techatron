@@ -82,7 +82,7 @@ body[data-menu-open='true'] .site-header__bar {
     background: none;
     color: var(--fg-muted);
     font-size: var(--text-sm);
-    font-weight: 550;
+    font-weight: 500;
     cursor: pointer;
     transition: color 0.2s, background-color 0.2s;
 }

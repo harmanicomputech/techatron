@@ -33,6 +33,7 @@ class AppServiceProvider extends ServiceProvider
                     'Digital agency' => $content->servicesIn('digital'),
                     'Technology' => $content->servicesIn('technology'),
                 ],
+                'technologies' => $content->technologies(),
                 'hasWork' => $content->work()->isNotEmpty(),
                 'hasInsights' => $content->insights()->isNotEmpty(),
             ]);

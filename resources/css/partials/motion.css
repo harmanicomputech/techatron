@@ -158,13 +158,19 @@
         scroll-behavior: auto !important;
     }
 
-    .clients__track {
-        animation: none;
+    /* One evenly wrapped grid of logos instead of moving rows */
+    .clients__rows {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+        padding-inline: var(--gutter);
     }
 
-    .clients__marquee {
-        overflow-x: auto;
-        mask-image: none;
+    .clients__row,
+    .clients__track,
+    .clients__group {
+        display: contents;
     }
 
     .clients__group[aria-hidden='true'] {

@@ -48,6 +48,65 @@
     color: var(--fg);
 }
 
+/* Technologies we build with */
+
+.footer__tech {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.25rem 2rem;
+    margin-top: clamp(3rem, 6vw, 4.5rem);
+    padding: 1.5rem clamp(1.25rem, 3vw, 2rem);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+}
+
+.tech-logos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem clamp(1.25rem, 3vw, 2.75rem);
+}
+
+.tech-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--fg-dim);
+    transition: color 0.3s, transform 0.4s var(--ease-out);
+}
+
+.tech-logo svg {
+    width: 1.45rem;
+    height: 1.45rem;
+    flex: none;
+    transition: color 0.3s;
+}
+
+.tech-logo:hover {
+    color: var(--fg);
+    transform: translateY(-2px);
+}
+
+.tech-logo:hover svg {
+    color: var(--brand);
+}
+
+@media (max-width: 640px) {
+    .footer__tech {
+        justify-content: center;
+        text-align: center;
+    }
+
+    .tech-logos {
+        justify-content: center;
+    }
+}
+
 .footer__wordmark {
     display: flex;
     align-items: center;

@@ -5,8 +5,7 @@
 @section('og_type', 'article')
 
 @push('schema')
-    <script type="application/ld+json">{!! json_encode([
-        '@context' => 'https://schema.org',
+    {{ \App\Support\Schema::script([
         '@type' => 'Article',
         'headline' => $article['title'],
         'description' => $article['summary'],
@@ -14,7 +13,7 @@
         'author' => ['@type' => 'Person', 'name' => $article['author']],
         'publisher' => ['@id' => url('/').'#organization'],
         'mainEntityOfPage' => route('insights.show', $article['slug']),
-    ], JSON_UNESCAPED_SLASHES | JSON_HEX_TAG) !!}</script>
+    ]) }}
 @endpush
 
 @section('content')

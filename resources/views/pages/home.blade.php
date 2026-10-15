@@ -3,13 +3,12 @@
 @section('description', 'Techatron is a full-service digital agency in Lagos specialising in website development, software development and mobile app development, plus brand, UI/UX design and digital campaigns.')
 
 @push('schema')
-    <script type="application/ld+json">{!! json_encode([
-        '@context' => 'https://schema.org',
+    {{ \App\Support\Schema::script([
         '@type' => 'WebSite',
         'name' => config('site.name'),
         'url' => url('/'),
         'publisher' => ['@id' => url('/').'#organization'],
-    ], JSON_UNESCAPED_SLASHES | JSON_HEX_TAG) !!}</script>
+    ]) }}
 @endpush
 
 @php

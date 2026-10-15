@@ -59,7 +59,7 @@
             <div class="swatches">
                 <i style="background: #0B34B7"></i><i style="background: #282828"></i><i style="background: #18B6FF"></i><i style="background: #FFFFFF"></i>
             </div>
-            <div class="type-sample">Aa <small>Sora · Geist</small></div>
+            <div class="type-sample">Aa <small>Poppins</small></div>
         </div>
     </div>
 

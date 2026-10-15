@@ -186,7 +186,7 @@
 .phase__num {
     font-family: var(--font-display);
     font-size: clamp(3rem, 2rem + 3vw, 5rem);
-    font-weight: 650;
+    font-weight: 600;
     line-height: 0.9;
     letter-spacing: -0.06em;
     color: transparent;

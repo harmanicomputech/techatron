@@ -2,7 +2,7 @@
 
 The website for Techatron Consulting Limited, a full-service digital agency specialising in website, software and mobile app development.
 
-It is built with Laravel 13, Blade and hand-written CSS, bundled with Vite. Motion uses GSAP (ScrollTrigger, SplitText) and Lenis. The site is light by default, with a charcoal dark mode, and every animation respects `prefers-reduced-motion`.
+It is built with Laravel 13, Blade and hand-written CSS, bundled with Vite. Text is set in Poppins. Motion uses GSAP (ScrollTrigger, SplitText) and Lenis. The site is light by default, with a charcoal dark mode, and every animation respects `prefers-reduced-motion`.
 
 See [`docs/AUDIT.md`](docs/AUDIT.md) for the audit, the creative direction and the open questions.
 
@@ -41,6 +41,7 @@ All copy lives in `resources/content/`:
 | `engagements.php` | Ways to engage |
 | `platforms.php` | Platforms shown on the homepage. Only list what the team genuinely uses. |
 | `work.php` | Case studies. The homepage section and the nav link appear once this file has entries. |
+| `technologies.php` | "Technologies we build with" row in the footer (Google, AWS, Java, Microsoft, Meta). Not a partnership claim. |
 | `clients.php` | Client logos below the homepage hero (files in `public/images/clients/`). Hidden while empty; six or more logos scroll continuously. |
 | `testimonials.php` | Verified client quotes. Hidden while empty. |
 | `insights.php` + `insights/{slug}.md` | Articles. The page and nav link appear once this file has entries. |

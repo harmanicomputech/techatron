@@ -54,6 +54,11 @@ class Content
         return collect($this->load('principles'));
     }
 
+    public function technologies(): Collection
+    {
+        return collect($this->load('technologies'));
+    }
+
     public function platforms(): Collection
     {
         return collect($this->load('platforms'));
@@ -70,10 +75,32 @@ class Content
         return $this->work()->get($slug);
     }
 
+    /**
+     * Client logos, each with a display width and height (in px) that gives
+     * every logo the same visual weight: wide wordmarks get shorter, compact
+     * marks get taller, within a fixed box.
+     */
     public function clients(): Collection
     {
         return collect($this->load('clients'))
-            ->map(fn (array $client, string $slug) => ['slug' => $slug] + $client);
+            ->map(fn (array $client, string $slug) => ['slug' => $slug] + $client + $this->logoSize($client['logo']));
+    }
+
+    /** @return array{width: int, height: int} */
+    private function logoSize(string $logo, float $area = 4400, int $maxWidth = 150, int $maxHeight = 62): array
+    {
+        $size = is_file($path = public_path($logo)) ? @getimagesize($path) : false;
+        $ratio = $size && $size[1] > 0 ? $size[0] / $size[1] : 3;
+
+        $width = min($maxWidth, sqrt($area * $ratio));
+        $height = $width / $ratio;
+
+        if ($height > $maxHeight) {
+            $height = $maxHeight;
+            $width = $height * $ratio;
+        }
+
+        return ['width' => (int) round($width), 'height' => (int) round($height)];
     }
 
     public function testimonials(): Collection

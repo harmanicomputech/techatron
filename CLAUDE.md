@@ -1,6 +1,6 @@
 # Techatron Consulting website
 
-Website for Techatron Consulting Limited, a full-service digital agency in Lagos specialising in website, software and mobile app development. Laravel 13, Blade, hand-written CSS, and JS built with Vite. Motion uses GSAP (ScrollTrigger, SplitText) and Lenis; there is no CSS or UI framework.
+Website for Techatron Consulting Limited, a full-service digital agency in Lagos specialising in website, software and mobile app development. Laravel 13, Blade, hand-written CSS, and JS built with Vite. Typeface: Poppins (400/500/600/700) for all text, Geist Mono for small technical labels. Motion uses GSAP (ScrollTrigger, SplitText) and Lenis; there is no CSS or UI framework.
 
 ## Commands
 
@@ -11,7 +11,7 @@ Website for Techatron Consulting Limited, a full-service digital agency in Lagos
 
 ## Layout
 
-- `resources/content/*.php` — all site copy (services, approach, challenges, principles, engagements, platforms, clients, work, testimonials, insights). Edit copy here, not in templates. Read through `App\Support\Content`. Each service has a `group`: `specialty` (websites, software, mobile — always first), `digital` (campaigns, brand/UI-UX) or `technology`.
+- `resources/content/*.php` — all site copy (services, approach, challenges, principles, engagements, platforms, technologies, clients, work, testimonials, insights). Edit copy here, not in templates. Read through `App\Support\Content`. Each service has a `group`: `specialty` (websites, software, mobile — always first), `digital` (campaigns, brand/UI-UX) or `technology`.
 - `config/site.php` — company details; contact details come from `.env` and are hidden when blank
 - `routes/web.php` — pages, contact form, sitemap/robots, legacy redirects (redirects must stay above `/services/{slug}`)
 - `app/Http/Controllers/` — thin controllers; `EnquiryController` + `StoreEnquiryRequest` handle the project brief form
@@ -33,7 +33,7 @@ Website for Techatron Consulting Limited, a full-service digital agency in Lagos
 
 ## Content rules
 
-Never invent clients, testimonials, statistics, certifications, partnerships, awards or outcomes. Sections for client logos, work, testimonials and insights hide themselves while their content files are empty — leave them empty rather than adding placeholders. Concept work must be marked `'type' => 'concept'`. Copy is British English.
+Never invent clients, testimonials, statistics, certifications, partnerships, awards or outcomes. The footer's technology row (`resources/content/technologies.php`) says "Technologies we build with" — do not relabel those companies as partners unless Techatron holds their official partner status. Sections for client logos, work, testimonials and insights hide themselves while their content files are empty — leave them empty rather than adding placeholders. Concept work must be marked `'type' => 'concept'`. Copy is British English.
 
 ## Enquiry form
 

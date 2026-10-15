@@ -35,6 +35,27 @@ class PagesTest extends TestCase
         $this->assertSame(1, substr_count($response->getContent(), '<h1'), "{$uri} should have exactly one h1");
     }
 
+    public function test_structured_data_is_valid_json_on_every_page(): void
+    {
+        $uris = ['/', '/about', '/approach', '/contact', '/services'];
+        foreach (app(Content::class)->services()->keys() as $slug) {
+            $uris[] = "/services/{$slug}";
+        }
+
+        foreach ($uris as $uri) {
+            $html = $this->get($uri)->assertOk()->getContent();
+            preg_match_all('/<script type="application\/ld\+json">(.*?)<\/script>/s', $html, $blocks);
+            $this->assertNotEmpty($blocks[1], "{$uri} has no structured data");
+
+            foreach ($blocks[1] as $json) {
+                $data = json_decode($json, true);
+                $this->assertIsArray($data, "{$uri} has invalid JSON-LD");
+                $this->assertSame('https://schema.org', $data['@context'] ?? null, "{$uri} JSON-LD is missing @context");
+                $this->assertStringNotContainsString('<?php', $json);
+            }
+        }
+    }
+
     public function test_every_service_has_a_page_linked_from_the_index(): void
     {
         $services = app(Content::class)->services();
@@ -151,43 +172,59 @@ class PagesTest extends TestCase
             ->assertSee('"sameAs":["https://www.linkedin.com/company/techatron-consulting-limited/"', false);
     }
 
-    public function test_client_logos_are_hidden_until_real_clients_are_listed(): void
+    public function test_client_logos_are_listed_with_names_and_files(): void
     {
-        $this->get('/')->assertOk()->assertDontSee('id="clients"', false)->assertDontSee('marquee');
-    }
+        $clients = app(Content::class)->clients();
 
-    public function test_client_logos_render_with_names_as_alt_text(): void
-    {
-        $clients = [];
-        foreach (range(1, 6) as $i) {
-            $clients["client-{$i}"] = ['name' => "Client {$i}", 'logo' => "images/clients/client-{$i}.svg"];
+        $this->assertGreaterThanOrEqual(6, $clients->count());
+        foreach ($clients as $client) {
+            $this->assertFileExists(public_path($client['logo']), "{$client['name']} logo is missing");
+            $this->assertLessThanOrEqual(150, $client['width']);
+            $this->assertLessThanOrEqual(62, $client['height']);
         }
-        $clients['client-1']['url'] = 'https://client-one.example';
-        app(Content::class)->override('clients', $clients);
 
         $html = $this->get('/')->assertOk()
             ->assertSee('id="clients"', false)
-            ->assertSee('alt="Client 6"', false)
-            ->assertSee('href="https://client-one.example"', false)
+            ->assertSee('alt="Brick Homes"', false)
+            ->assertSee('alt="Zealot Chemicals Limited"', false)
             ->getContent();
 
-        // Six or more logos scroll: the list is duplicated for a seamless loop,
-        // and the copy is hidden from assistive technology.
-        $this->assertSame(2, substr_count($html, 'class="clients__group '));
-        $this->assertSame(1, substr_count($html, 'alt="Client 1"'));
-        $this->assertStringContainsString('aria-hidden="true"', $html);
+        // Two rows, each duplicated for a seamless loop; the copies are hidden
+        // from assistive technology so every name is announced once.
+        $this->assertSame(4, substr_count($html, 'class="clients__group"'));
+        $this->assertSame(1, substr_count($html, 'alt="Brick Homes"'));
+        $this->assertStringContainsString('is-scrolling', $html);
     }
 
-    public function test_a_few_client_logos_sit_in_a_static_row(): void
+    public function test_client_section_is_hidden_without_clients(): void
+    {
+        app(Content::class)->override('clients', []);
+
+        $this->get('/')->assertOk()->assertDontSee('id="clients"', false);
+    }
+
+    public function test_a_few_client_logos_sit_in_a_static_row_with_optional_links(): void
     {
         app(Content::class)->override('clients', [
-            'one' => ['name' => 'One', 'logo' => 'images/clients/one.svg'],
+            'one' => ['name' => 'One', 'logo' => 'images/clients/one.svg', 'url' => 'https://one.example'],
             'two' => ['name' => 'Two', 'logo' => 'images/clients/two.svg'],
         ]);
 
-        $html = $this->get('/')->assertOk()->getContent();
-        $this->assertStringContainsString('clients__group--static', $html);
-        $this->assertStringNotContainsString('clients__marquee', $html);
+        $html = $this->get('/')->assertOk()->assertSee('href="https://one.example"', false)->getContent();
+        $this->assertStringNotContainsString('is-scrolling', $html);
+        $this->assertSame(1, substr_count($html, 'class="clients__group"'));
+    }
+
+    public function test_footer_lists_technologies_without_claiming_partnerships(): void
+    {
+        $html = $this->get('/')->assertOk()
+            ->assertSee('Technologies we build with')
+            ->assertSeeInOrder(['Google', 'AWS', 'Java', 'Microsoft', 'Meta'])
+            ->getContent();
+
+        preg_match('/<div class="footer__tech">(.*?)<\/ul>/s', $html, $row);
+        $this->assertNotEmpty($row);
+        $this->assertStringNotContainsStringIgnoringCase('partner', $row[1]);
     }
 
     public function test_contact_page_preselects_a_valid_service_from_the_query(): void

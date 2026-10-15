@@ -4,8 +4,7 @@
 @section('description', $service['summary'])
 
 @push('schema')
-    <script type="application/ld+json">{!! json_encode([
-        '@context' => 'https://schema.org',
+    {{ \App\Support\Schema::script([
         '@graph' => [
             [
                 '@type' => 'Service',
@@ -24,7 +23,7 @@
                 ],
             ],
         ],
-    ], JSON_UNESCAPED_SLASHES | JSON_HEX_TAG) !!}</script>
+    ]) }}
 @endpush
 
 @section('content')

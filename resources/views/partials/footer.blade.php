@@ -55,6 +55,20 @@
             </div>
         </div>
 
+        @if ($technologies->isNotEmpty())
+            <div class="footer__tech">
+                <h2 class="label">Technologies we build with</h2>
+                <ul class="tech-logos">
+                    @foreach ($technologies as $tech)
+                        <li class="tech-logo" style="--brand: {{ $tech['colour'] }}">
+                            <x-tech-logo :name="$tech['icon']" />
+                            <span>{{ $tech['name'] }}</span>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <div class="footer__wordmark" aria-hidden="true" data-footer-word>
             @foreach (str_split('TECHATRON') as $letter)<span>{{ $letter }}</span>@endforeach
         </div>

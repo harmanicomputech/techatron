@@ -193,3 +193,25 @@ The scrolling band of service names below the hero has been replaced with a clie
 - in dark mode, logos become white silhouettes unless a dark version is supplied
 
 Logos are listed in `resources/content/clients.php`, with the files in `public/images/clients/`. The section stays hidden until real clients are added. **Needed:** client logos (SVG or transparent PNG) and confirmation that each client may be named.
+
+---
+
+## Revision 5 — client logos, Poppins, technologies row
+
+- **Client logos.** The 15 supplied logos are now live in two rows that drift in opposite directions.
+  - They sit on light cards in both themes, so every logo keeps its true colours.
+  - They are greyscale until hovered, and shown in full colour on touch screens.
+  - Each logo is scaled to the same visual weight.
+  - Logos are listed in `resources/content/clients.php`, with the files in `public/images/clients/`.
+  - Processing applied to the files:
+    - all logos trimmed of empty margins and converted to WebP
+    - the white lettering of Powernest and Don Lamba recoloured to charcoal, so it shows on light cards
+    - the white background removed from SEE
+    - The Wardrobe Manager wordmark lifted out of its white disc
+
+  The supplied files were treated as approval to name these clients.
+- **Typeface.** Poppins now replaces Sora and Geist for all headings and body text. Geist Mono stays for small technical labels.
+- **Technologies row.** A "Technologies we build with" row in the footer shows Google, AWS, Java, Microsoft and Meta.
+  - The owner asked for these as partner logos. They are labelled as technologies instead, because "partner" implies official partner status, and these companies' brand rules forbid using their logos to suggest it.
+  - If Techatron holds an official status (for example Google Partner, AWS Partner Network or Microsoft Solutions Partner), use that programme's official badge and wording.
+  - Logo sources: Google and Meta marks from Simple Icons; the Microsoft mark drawn as its four squares. Simple Icons no longer carries AWS and Java logos at their owners' request, so those show their names with a neutral icon.

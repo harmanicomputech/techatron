@@ -59,8 +59,8 @@
     --blob-3: rgb(124 92 255 / 0.16);
 
     /* Type */
-    --font-display: 'Sora Variable', 'Geist Variable', ui-sans-serif, system-ui, sans-serif;
-    --font-sans: 'Geist Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --font-display: 'Poppins', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --font-sans: 'Poppins', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
     --font-mono: 'Geist Mono Variable', ui-monospace, 'SFMono-Regular', Menlo, monospace;
 
     --text-xs: 0.75rem;
