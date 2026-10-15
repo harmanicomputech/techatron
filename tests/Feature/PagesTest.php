@@ -11,7 +11,7 @@ class PagesTest extends TestCase
     public static function pages(): array
     {
         return [
-            'home' => ['/', 'We build websites, software, mobile apps and campaigns that grow your business.'],
+            'home' => ['/', 'Turn ideas into'],
             'services' => ['/services', 'Everything your digital presence needs'],
             'approach' => ['/approach', 'A disciplined path from idea'],
             'about' => ['/about', 'A digital agency that thinks like an engineer'],
@@ -225,6 +225,18 @@ class PagesTest extends TestCase
         preg_match('/<div class="footer__tech">(.*?)<\/ul>/s', $html, $row);
         $this->assertNotEmpty($row);
         $this->assertStringNotContainsStringIgnoringCase('partner', $row[1]);
+    }
+
+    public function test_hero_studio_has_accessible_tabs_for_each_specialty(): void
+    {
+        $html = $this->get('/')->assertOk()
+            ->assertSee('role="tablist"', false)
+            ->assertSeeInOrder(['Website', 'Mobile app', 'Software'])
+            ->getContent();
+
+        $this->assertSame(3, substr_count($html, 'role="tab"'));
+        $this->assertSame(3, substr_count($html, 'role="tabpanel"'));
+        $this->assertSame(1, substr_count($html, 'aria-selected="true"'));
     }
 
     public function test_contact_page_preselects_a_valid_service_from_the_query(): void

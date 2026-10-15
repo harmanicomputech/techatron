@@ -215,3 +215,18 @@ Logos are listed in `resources/content/clients.php`, with the files in `public/i
   - The owner asked for these as partner logos. They are labelled as technologies instead, because "partner" implies official partner status, and these companies' brand rules forbid using their logos to suggest it.
   - If Techatron holds an official status (for example Google Partner, AWS Partner Network or Microsoft Solutions Partner), use that programme's official badge and wording.
   - Logo sources: Google and Meta marks from Simple Icons; the Microsoft mark drawn as its four squares. Simple Icons no longer carries AWS and Java logos at their owners' request, so those show their names with a neutral icon.
+
+---
+
+## Revision 6 — new hero: the build studio
+
+The homepage hero now has a centred headline, "Turn ideas into digital products people love.", set in Bricolage Grotesque ExtraBold. Below it sits an animated studio window:
+
+- **Tabs:** Website, Mobile app and Software. They cycle every 7 seconds, and also work as accessible tabs with click and arrow-key support.
+- **Code pane:** each tab types out its own code.
+- **Preview pane:** a website, a mobile app or a dashboard builds itself piece by piece.
+- **Status bar:** steps tick through Design, Build, Test and Deploy, alongside a progress line.
+
+The window tilts back in 3D and flattens as you scroll. Technology tags (AI, Cloud, APIs, iOS, Android, SEO, UI/UX, Analytics) float around it and follow the mouse, the logo's eclipse rises behind it, and a perspective grid moves underneath.
+
+Under reduced motion, every panel shows complete and nothing cycles; without JavaScript, the first panel animates once. The "Digital agency" badge and a Campaign tab were tried and removed at the owner's request.

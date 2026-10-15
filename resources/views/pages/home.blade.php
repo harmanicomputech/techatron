@@ -13,50 +13,33 @@
 
 @php
     $specialties = $services->where('group', 'specialty');
-    $words = ['websites', 'software', 'mobile apps', 'campaigns'];
-    $specialtyIcons = ['website-development' => 'globe', 'software-development' => 'code', 'mobile-app-development' => 'mobile'];
 @endphp
 
 @section('content')
 
-    {{-- Hero --}}
-    <section class="hero" aria-labelledby="hero-title">
+    {{-- Hero: headline above a live "build studio" --}}
+    <section class="hero hero--studio" aria-labelledby="hero-title">
         <div class="hero__bg" aria-hidden="true">
             <div class="blob blob--1" data-parallax="0.35"></div>
             <div class="blob blob--2" data-parallax="-0.25"></div>
-            <div class="blob blob--3" data-parallax="0.15"></div>
-            <div class="grid-bg"></div>
+            <div class="hero__floor"><div class="hero__floor-grid"></div></div>
         </div>
 
-        <div class="container hero__grid">
-            <div>
-                <p class="hero__badge" data-intro="fade"><span class="tag">Digital agency</span> Websites · Software · Mobile apps</p>
-                <h1 class="display hero__title" id="hero-title" aria-label="We build websites, software, mobile apps and campaigns that grow your business.">
-                    <span class="line" aria-hidden="true"><span class="line__inner" data-intro="line">We build</span></span>
-                    <span class="line" aria-hidden="true"><span class="line__inner" data-intro="line">
-                        <span class="rotator" data-rotator>
-                            @foreach ($words as $word)
-                                <span class="rotator__word {{ $loop->first ? 'is-active' : '' }}">{{ $word }}</span>
-                            @endforeach
-                        </span>
-                    </span></span>
-                    <span class="line" aria-hidden="true"><span class="line__inner" data-intro="line">that grow your business.</span></span>
-                </h1>
-                <p class="lead hero__lead" data-intro="fade">Techatron is a full-service digital agency specialising in website, software and mobile app development, with the design, digital marketing and technology support to make them succeed.</p>
-                <div class="actions" data-intro="fade">
-                    <a class="btn btn--primary btn--lg" href="{{ route('contact') }}" data-magnetic><span class="btn__label">Start your project</span> <x-icon name="arrow" class="arrow" /></a>
-                    <a class="btn btn--lg" href="{{ route('services.index') }}" data-magnetic><span class="btn__label">Explore services</span></a>
-                </div>
-                <ul class="hero__specialties" aria-label="Our specialties" data-intro="fade">
-                    @foreach ($specialties as $item)
-                        <li><a href="{{ route('services.show', $item['slug']) }}"><x-icon :name="$specialtyIcons[$item['slug']]" /> {{ $item['name'] }}</a></li>
-                    @endforeach
-                </ul>
+        <div class="container hero__intro">
+            <h1 class="display hero__title" id="hero-title">
+                <span class="line"><span class="line__inner" data-intro="line">Turn ideas into</span></span>
+                <span class="line"><span class="line__inner" data-intro="line"><span class="hero__accent">digital products</span> people love.</span></span>
+            </h1>
+            <p class="lead hero__lead" data-intro="fade">Techatron is a full-service digital agency. We design, engineer and launch websites, software and mobile apps, then grow them with campaigns that work.</p>
+            <div class="actions hero__actions" data-intro="fade">
+                <a class="btn btn--primary btn--lg" href="{{ route('contact') }}" data-magnetic><span class="btn__label">Start your project</span> <x-icon name="arrow" class="arrow" /></a>
+                <a class="btn btn--lg" href="{{ route('services.index') }}" data-magnetic><span class="btn__label">Explore services</span></a>
             </div>
-            @include('partials.hero-scene')
         </div>
 
-        <a class="scroll-cue" href="#specialties" aria-label="Scroll to content"><span></span>Scroll</a>
+        <div class="container">
+            @include('partials.hero-studio')
+        </div>
     </section>
 
     @include('partials.clients')

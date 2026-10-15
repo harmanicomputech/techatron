@@ -1,6 +1,6 @@
 # Techatron Consulting website
 
-Website for Techatron Consulting Limited, a full-service digital agency in Lagos specialising in website, software and mobile app development. Laravel 13, Blade, hand-written CSS, and JS built with Vite. Typeface: Poppins (400/500/600/700) for all text, Geist Mono for small technical labels. Motion uses GSAP (ScrollTrigger, SplitText) and Lenis; there is no CSS or UI framework.
+Website for Techatron Consulting Limited, a full-service digital agency in Lagos specialising in website, software and mobile app development. Laravel 13, Blade, hand-written CSS, and JS built with Vite. Typefaces: Bricolage Grotesque (variable, 800) for the homepage hero headline only (`--font-hero`), Poppins (400/500/600/700) for all other text, Geist Mono for small technical labels. Motion uses GSAP (ScrollTrigger, SplitText) and Lenis; there is no CSS or UI framework.
 
 ## Commands
 
@@ -22,6 +22,7 @@ Website for Techatron Consulting Limited, a full-service digital agency in Lagos
   - `.section--alt`, `.section--ink` and `.section--brand` re-theme a section by redefining semantic tokens.
   - Components use semantic tokens (`--bg`, `--fg`, `--accent`, `--accent-text`, …), never raw palette values.
 - `public/js/theme.js` applies the saved theme before first paint. `resources/js/modules/theme.js` runs the toggle, with a circular View Transition reveal.
+- Homepage hero: `resources/views/partials/hero-studio.blade.php` (the "build studio": tabs Website/Mobile app/Software, typing code, self-building previews, status bar) styled in `resources/css/partials/studio.css` and driven by `resources/js/modules/studio.js` (auto-cycles every 7s; stops when a visitor picks a tab; never cycles under reduced motion).
 - `resources/js/modules/motion.js` — every animation is opt-in through data attributes:
   - `data-reveal`, `data-split` (do not use on headings that contain gradient text), `data-scrub` and `data-parallax`
   - `data-depth` (hero pointer parallax), `data-tilt`, `data-spotlight`, `data-magnetic` and `data-cursor="Label"`

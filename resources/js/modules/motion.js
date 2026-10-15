@@ -39,29 +39,26 @@ function initIntro() {
     const tl = gsap.timeline({ defaults: { ease: 'expo.out' } });
     tl.from('[data-intro="line"]', { yPercent: 115, duration: 1.3, stagger: 0.12 })
         .from('[data-intro="fade"]', { y: 30, autoAlpha: 0, duration: 1, stagger: 0.08 }, 0.35)
-        .from('[data-intro="orb"]', { scale: 0.6, autoAlpha: 0, duration: 1.6 }, 0.1)
-        .from('[data-intro="browser"]', { y: 80, rotateX: -18, autoAlpha: 0, duration: 1.4 }, 0.3)
-        .from('[data-intro="phone"]', { y: 120, autoAlpha: 0, duration: 1.4 }, 0.45)
-        .from('[data-intro="card"]', { scale: 0.7, autoAlpha: 0, duration: 1, stagger: 0.12, ease: 'back.out(1.6)' }, 0.7);
+        .from('.hero__sun', { yPercent: 25, autoAlpha: 0, duration: 2 }, 0.2)
+        .from('[data-intro="studio"]', { y: 120, autoAlpha: 0, duration: 1.6 }, 0.55)
+        .from('[data-intro="chip"]', { scale: 0.6, autoAlpha: 0, duration: 0.9, stagger: 0.07, ease: 'back.out(1.8)' }, 1);
 }
 
-/* Rotating specialty word in the hero */
-function initRotator() {
-    const rotator = document.querySelector('[data-rotator]');
-    if (!rotator) return;
+/* The studio window starts tilted back and flattens towards you on scroll */
+function initStudioTilt() {
+    const studio = document.querySelector('[data-studio]');
+    if (!studio) return;
 
-    const words = $$('.rotator__word', rotator);
-    let index = 0;
-
-    setInterval(() => {
-        if (document.hidden) return;
-        const current = words[index];
-        index = (index + 1) % words.length;
-        current.classList.remove('is-active');
-        current.classList.add('is-leaving');
-        words[index].classList.add('is-active');
-        setTimeout(() => current.classList.remove('is-leaving'), 800);
-    }, 2600);
+    gsap.fromTo(
+        studio,
+        { rotateX: 16, scale: 0.94 },
+        {
+            rotateX: 0,
+            scale: 1,
+            ease: 'none',
+            scrollTrigger: { trigger: studio, start: 'top 95%', end: 'top 30%', scrub: 0.6 },
+        },
+    );
 }
 
 /* Pointer parallax for the hero scene layers */
@@ -82,13 +79,6 @@ function initSceneParallax() {
             l.x(dx * l.depth * -40);
             l.y(dy * l.depth * -30);
         });
-    });
-
-    // The scene drifts up and apart as the hero scrolls away
-    gsap.to(scene, {
-        yPercent: -12,
-        ease: 'none',
-        scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true },
     });
 }
 
@@ -338,7 +328,7 @@ export function initMotion() {
 
     initSmoothScroll();
     initIntro();
-    initRotator();
+    initStudioTilt();
     initSceneParallax();
     initParallax();
     initSplitHeadings();
